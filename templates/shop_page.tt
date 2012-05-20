@@ -17,6 +17,11 @@
           [% IF shop.demolished %] and demolished[% END %]
       [% ELSE %]
         Open
+        [% IF shop.checked %]
+          (last checked by us in [% shop.checked %])
+        [% ELSE %]
+          (as far as we know, but not recently checked)
+        [% END %]
       [% END %]
     </td>
   </tr>

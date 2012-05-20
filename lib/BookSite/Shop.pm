@@ -6,7 +6,7 @@ use Flickr::API2;
 use base qw( Class::Accessor );
 BookSite::Shop->mk_accessors( qw(
     id name address lat long description photo photo_copyright photo_license
-    new secondhand charity open
+    new secondhand charity open checked
     website blog twitter rgl londonist reading_matters thebookguide
 ) );
 
@@ -28,6 +28,7 @@ Object modelling a single shop.
     id => 12345,
     name => "A Book Shop",
     open => "yes",
+    checked => "May 2012",
     address => "5 High Street, W1 1AA",
     lat => 51.00000,
     long => 0.10000,
