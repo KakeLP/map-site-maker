@@ -1,0 +1,54 @@
+[%- USE CGI -%]
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+  <Document>
+
+ <name>London Bookshops KML file</name>
+<atom:author>      
+      <atom:name>London Bookshop Map</atom:name>
+    </atom:author>    
+    <atom:link href="http://londonbookshops.org/" rel="related" />  
+    <Style id="green">
+      <IconStyle>
+        <Icon>
+          <href>http://maps.google.com/mapfiles/ms/micons/green-dot.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="yellow">
+      <IconStyle>
+        <Icon>
+          <href>http://maps.google.com/mapfiles/ms/micons/yellow-dot.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="red">
+      <IconStyle>
+        <Icon>
+          <href>http://maps.google.com/mapfiles/ms/micons/red-dot.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    [% FOREACH point = points %]
+      <Placemark>
+        <name>
+          [% point.name %]
+        </name>
+        [% IF point.style %]
+          <styleUrl>#[% point.style %]</styleUrl>
+        [% END %]
+        <Point>
+          <coordinates>[% point.long %],[% point.lat %]</coordinates>
+        </Point>
+        <description>
+          <![CDATA[
+            [% IF point.address %]
+              [% point.address %]<br>
+            [% END %]
+            <a href="[% point.url %]">London Bookshop Map entry</a>
+          ]]>
+        </description>
+      </Placemark>
+    [% END %]
+  </Document>
+</kml>

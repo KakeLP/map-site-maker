@@ -1,0 +1,7 @@
+[% is_admin_page = 1 %]
+[% INCLUDE header.tt subtitle = 'Data upload complete' %]
+
+<p>[% succ_msg %]</p>
+<p><a href="[% cgi_url %]">Upload another datafile</a>.</p>
+
+[% INCLUDE footer.tt %]

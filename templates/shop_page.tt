@@ -1,0 +1,100 @@
+[% subtitle = shop.name | html %]
+[% subtitle_class = "shop_name" %]
+[% INCLUDE header.tt %]
+
+[% IF shop.photo_url %]
+  <div id="shop_info" class="shop_info_with_photo">
+[% ELSE %]
+  <div id="shop_info">
+[% END %]
+  <table>
+  <tr class="shop_status">
+    <th>Status:</th>
+    <td>
+      [% IF shop.closed %]
+        Closed
+          [% IF shop.closed_date %]([% shop.closed_date | html %])[% END %]
+          [% IF shop.demolished %] and demolished[% END %]
+      [% ELSE %]
+        Open
+      [% END %]
+    </td>
+  </tr>
+  <tr class="shop_address">
+    <th>Address:</th>
+    <td>
+      [% shop.address | html %]
+      [% IF shop.os_x AND shop.os_y %]
+        (<a href="http://streetmap.co.uk/map.srf?x=[% shop.os_x | html %]&y=[% shop.os_y | html %]">streetmap</a>)
+      [% END %]
+      [% IF shop.lat_and_long %]
+        (<a href="http://www.openstreetmap.org/?mlat=[% shop.lat | html %]&amp;mlon=[% shop.long | html %]&amp;zoom=15">osm</a>)
+        (<a href="http://maps.google.co.uk/maps?q=[% FILTER replace( '\s', '+' ) %][% node_name %][% END %]@[% shop.lat %],[% shop.long %]&z=15">gmap</a>)
+        (<a href="http://www.bing.com/maps/default.aspx?cp=[% shop.lat %]~[% shop.long %]&style=c&lvl=15&rtp=~pos.[% shop.lat %]_[% shop.long %]_[% node_name | replace( '\s', '+' ) %]">bingmap</a>)
+        (<a href="http://maps.google.co.uk/maps?q=[% shop.lat %],[% shop.long %]&cbll=[% shop.lat %],[% shop.long %]&layer=c&cbp=12,0,,0,5">streetview</a>)
+      [% END %]
+    </td>
+  </tr>
+  [% IF shop.website %]
+    <tr class="shop_website">
+      <th>Website:</th>
+      <td><a href="[% shop.website | html %]">Website</a></td>
+    </tr>
+  [% END %]
+  [% IF shop.blog %]
+    <tr class="shop_blog">
+      <th>Blog:</th>
+      <td><a href="[% shop.blog | html %]">Blog</a></td>
+    </tr>
+  [% END %]
+  [% IF shop.twitter %]
+    <tr class="shop_twitter">
+      <th>Twitter:</th>
+      <td><a href="http://twitter.com/[% shop.twitter | html %]">@[% shop.twitter | html %]</a></td>
+    </tr>
+  [% END %]
+  [% IF shop.has_links %]
+    <tr class="shop_links"><th>Links:</th>
+    <td><ul>
+      [% IF shop.rgl %]
+        <li><a href="[% shop.rgl | html %]">Randomness Guide to London</a></li>
+      [% END %]
+      [% IF shop.londonist %]
+        <li><a href="[% shop.londonist | html %]">Londonist</a></li>
+      [% END %]
+      [% IF shop.reading_matters %]
+        <li><a href="[% shop.reading_matters | html %]">Reading Matters</a>
+        </li>
+      [% END %]
+      [% IF shop.thebookguide %]
+        <li><a href="[% shop.thebookguide | html %]">TheBookGuide</a>
+        </li>
+      [% END %]
+      [% shop.other_links %]
+    </ul></td></tr>
+  [% END %]
+  [% IF shop.description %]
+    <tr class="shop_description">
+      <th>Notes:</th>
+      <td>[% shop.description | html %]</td>
+    </tr>
+  [% END %]
+  </table>
+</div>
+
+<div id="shop_photo">
+  [% IF shop.photo_url %]
+    <div id="photo">
+      <a href="[% shop.photo | html %]"><img class="shop_photo" src="[% shop.photo_url | html %]" width="[% shop.photo_width | html %]" height="[% shop.photo_height | html %]"></a>
+    </div>
+    [% IF shop.photo_copyright AND shop.photo_license %]
+      <div id="photo_copyright">
+        <a href="[% shop.photo | html %]">Photo &copy;
+        [% shop.photo_copyright | html %]</a>
+        (used under <a href="[% shop.photo_license %]">Creative Commons</a>)
+      </div>
+    [% END %]
+  [% END %]
+</div>
+
+[% INCLUDE footer.tt %]

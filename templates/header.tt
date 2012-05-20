@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>[% IF subtitle %][% subtitle %]: [% END %]London Bookshop Map</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+  <link rel="stylesheet" href="[% base_url %]stylesheets/lb.css" type="text/css" />
+  <link rel="stylesheet" href="http://code.leafletjs.com/leaflet-0.3.1/leaflet.css" />
+  <!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://code.leafletjs.com/leaflet-0.3.1/leaflet.ie.css" />
+  <![endif]-->
+
+  <script type="text/javascript" 
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"> 
+  </script>
+  <script type="text/javascript" src="[% base_url %]js/lb.js"></script>
+
+  [% IF do_map %]
+    <script src="http://code.leafletjs.com/leaflet-0.3.1/leaflet.js"></script>
+    <script type="text/javascript" src="[% base_url %]js/map.js"></script>
+  [% END %]
+
+</head>
+
+<body>
+
+<div id="body_wrapper">
+
+  <div id="banner">
+    <h1 class="page_header"><a href="[% base_url %]">London Bookshop Map</a></h1>
+  </div>
+
+  [% INCLUDE navbar.tt %]
+
+  <div id="main_content">
+
+    [% IF subtitle %]
+      <h2[% IF subtitle_class %] class="[% subtitle_class %]"[% END %]>[% subtitle %]</h2>
+    [% END %]

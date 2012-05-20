@@ -1,0 +1,58 @@
+[% USE CGI %]
+[% USE JSON ( convert_blessed => 1, allow_blessed => 1 ) %]
+
+[% do_map = 1 %]
+[% INCLUDE header.tt %]
+
+<div id="map_canvas"></div>
+
+<div id="shop_list">
+
+  <div id="map_key">
+  <p>green = open, red = closed</p>
+  </div>
+
+  <p>Bookshops in London
+     (<a href="[% index_url %]">view without a map</a>):</p>
+  <ul>
+    [% i = 0 %]
+    [% FOREACH shop = shops %]
+      [% i = i + 1 %]
+      <li>
+        <span>
+        [% IF shop.not_on_map %]
+          [% CGI.escapeHTML( shop.name ) %] (not on map &#8212;
+          <a href="[% base_url %]shops/[% shop.id %].html">view shop info</a>)
+        [% ELSE %]
+          <a href="#" onclick="return show_marker( [% i %] )">[% CGI.escapeHTML( shop.name ) %]</a>
+        [% END %]
+        </span>
+      </li>
+    [% END %]
+  </ul>
+
+  <p>Last updated at [% updated | html %].</p>
+
+</div>
+
+<script type="text/javascript">
+
+  min_lat = [% min_lat %];
+  min_long = [% min_long %];
+  max_lat = [% max_lat %];
+  max_long = [% max_long %];
+  centre_lat = [% centre_lat %];
+  centre_long = [% centre_long %];
+
+  function add_markers() {
+    var shop;
+    [% i = 0 %]
+    [% FOREACH shop = shops %]
+      [% i = i + 1 %]
+      shop = [% shop.json %];
+      add_marker( [% i %], shop );
+    [% END %]
+  }
+</script>
+
+[% INCLUDE footer.tt %]

@@ -1,0 +1,37 @@
+[% USE CGI %]
+
+[% INCLUDE header.tt %]
+
+<div id="shop_list_no_map">
+
+  <div class="shop_table_key">
+    <table>
+      <tr><th class="status open"><span>O</span></th><td>= open</td></tr>
+      <tr><th class="status closed"><span>C</span></th><td>= closed</td></tr>
+    </table>
+  </div>
+
+  <p>Bookshops in London
+     (<a href="[% map_url %]">view them on a map</a>):</p>
+
+  <table class="shop_list">
+    <tr>
+      <th></th><th>Name</th><th>Address</th>
+    </tr>
+    [% FOREACH shop = shops %]
+      <tr>
+        [% IF shop.closed %]
+          <td class="status closed"><span>C</span></td>
+        [% ELSE %]
+          <td class="status open"><span>O</span></td>
+        [% END %]
+        <td><a href="[% base_url %]shops/[% shop.id | html %].html">[% shop.name | html %]</a></td>
+        <td>[% shop.address | html %]</td>
+      </tr>
+    [% END %]
+  </table>
+</div>
+
+<p>Last updated at [% updated | html %].</p>
+
+[% INCLUDE footer.tt %]

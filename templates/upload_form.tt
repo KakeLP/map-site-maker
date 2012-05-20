@@ -1,0 +1,26 @@
+[% is_admin_page = 1 %]
+[% INCLUDE header.tt subtitle = 'Upload data' %]
+
+[% IF errmsg %]
+  <div class="upload_error">
+    <p>ERROR:</p>
+    [% errmsg %]
+    <p>(If you don't understand this error message, please report it as a
+    bug, including the full text of the message.)</p>
+  </div>
+[% END %]
+
+<h3>Upload YAML file</h3>
+
+<form method="post" enctype="multipart/form-data"
+      action="[% cgi_url %]" onSubmit="return reassure()">
+
+  <p>YAML file: <input type="file" name="datafile" size="80" /></p>
+
+  <p><input type="submit" name="Upload" value="Upload" /></p>
+
+  <p id="upload_msg"></p>
+
+</form>
+
+[% INCLUDE footer.tt %]
