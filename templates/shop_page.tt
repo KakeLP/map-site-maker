@@ -11,17 +11,17 @@
   <tr class="shop_status">
     <th>Status:</th>
     <td>
-      [% IF shop.closed %]
-        Closed
-          [% IF shop.closed_date %]([% shop.closed_date | html %])[% END %]
-          [% IF shop.demolished %] and demolished[% END %]
-      [% ELSE %]
+      [% IF shop.open %]
         Open
         [% IF shop.checked %]
           (last checked by us in [% shop.checked %])
         [% ELSE %]
           (as far as we know, but not recently checked)
         [% END %]
+      [% ELSE %]
+        Closed
+          [% IF shop.closed_date %]([% shop.closed_date | html %])[% END %]
+          [% IF shop.demolished %] and demolished[% END %]
       [% END %]
     </td>
   </tr>

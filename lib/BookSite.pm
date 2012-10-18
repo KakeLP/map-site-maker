@@ -83,9 +83,11 @@ sub parse_yaml {
     if ( !$datum->{name} ) {
       next;
     }
-    my $open = $datum->{open};
-    if ( !$open || ( $open ne "yes" && $open ne "no" ) ) {
-      $datum->{open} = "unknown";
+    my $open = $datum->{open} || "";
+    if ( $open eq "yes" || $open eq "1" ) {
+      $datum->{open} = 1;
+    } else {
+      $datum->{open} = 0;
     }
 
     if ( $check_flickr && $datum->{photo} ) {

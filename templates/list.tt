@@ -20,10 +20,10 @@
     </tr>
     [% FOREACH shop = shops %]
       <tr>
-        [% IF shop.closed %]
-          <td class="status closed"><span>C</span></td>
-        [% ELSE %]
+        [% IF shop.open %]
           <td class="status open"><span>O</span></td>
+        [% ELSE %]
+          <td class="status closed"><span>C</span></td>
         [% END %]
         <td><a href="[% base_url %]shops/[% shop.id | html %].html">[% shop.name | html %]</a></td>
         <td>[% shop.address | html %]</td>

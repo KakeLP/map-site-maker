@@ -12,8 +12,7 @@ var gicon = L.Icon.extend( {
 var icon_base_url = 'http://maps.google.com/mapfiles/ms/micons/';
 
 icons.open = new gicon( icon_base_url + 'green-dot.png' );
-icons.closed = new gicon( icon_base_url + 'yellow-dot.png' );
-icons.demolished = new gicon( icon_base_url + 'red-dot.png' );
+icons.closed = new gicon( icon_base_url + 'red-dot.png' );
 
 $(
   function() {
@@ -51,12 +50,10 @@ function add_marker( i, shop ) {
 
   position = new L.LatLng( shop.lat, shop.long );
 
-  if ( shop.demolished ) {
-    icon = icons.demolished;
-  } else if ( shop.closed ) {
-    icon = icons.closed;
-  } else {
+  if ( shop.open ) {
     icon = icons.open;
+  } else {
+    icon = icons.closed;
   }
 
   marker = new L.Marker( position, { icon: icon } );
@@ -64,9 +61,7 @@ function add_marker( i, shop ) {
 
   content = '<a href="' + base_url + 'shops/' + shop.id + '.html">' +
             shop.name + '</a>';
-  if ( shop.demolished ) {
-    content = content + ' (demolished)';
-  } else if ( shop.closed ) {
+  if ( !shop.open ) {
     content = content + ' (closed)';
   }
   content = content + '<br>' + shop.address;
