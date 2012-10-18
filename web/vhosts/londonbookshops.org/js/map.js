@@ -3,16 +3,28 @@ var positions = [], markers = [];
 var base_url = "http://londonbookshops.org/";
 var icons = {};
 
-var gicon = L.Icon.extend( {
-    shadowUrl: null,
-    iconSize: new L.Point( 32, 32 ),
-    iconAnchor: new L.Point( 15, 32 ),
-    popupAnchor: new L.Point( 0, -40 )
+var gicon_green = L.Icon.extend( {
+    options: {
+      iconUrl: 'http://maps.google.com/mapfiles/ms/micons/green-dot.png',
+      shadowUrl: null,
+      iconSize: new L.Point( 32, 32 ),
+      iconAnchor: new L.Point( 15, 32 ),
+      popupAnchor: new L.Point( 0, -40 )
+    }
 } );
-var icon_base_url = 'http://maps.google.com/mapfiles/ms/micons/';
 
-icons.open = new gicon( icon_base_url + 'green-dot.png' );
-icons.closed = new gicon( icon_base_url + 'red-dot.png' );
+var gicon_red = L.Icon.extend( {
+    options: {
+      iconUrl: 'http://maps.google.com/mapfiles/ms/micons/red-dot.png',
+      shadowUrl: null,
+      iconSize: new L.Point( 32, 32 ),
+      iconAnchor: new L.Point( 15, 32 ),
+      popupAnchor: new L.Point( 0, -40 )
+    }
+} );
+
+icons.open = new gicon_green();
+icons.closed = new gicon_red();
 
 $(
   function() {

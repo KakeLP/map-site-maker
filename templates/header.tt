@@ -6,9 +6,9 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
   <link rel="stylesheet" href="[% base_url %]stylesheets/lb.css" type="text/css" />
-  <link rel="stylesheet" href="http://code.leafletjs.com/leaflet-0.3.1/leaflet.css" />
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.css" />
   <!--[if lte IE 8]>
-    <link rel="stylesheet" href="http://code.leafletjs.com/leaflet-0.3.1/leaflet.ie.css" />
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.ie.css" />
   <![endif]-->
 
   <script type="text/javascript" 
@@ -17,7 +17,7 @@
   <script type="text/javascript" src="[% base_url %]js/lb.js"></script>
 
   [% IF do_map %]
-    <script src="http://code.leafletjs.com/leaflet-0.3.1/leaflet.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"></script>
     <script type="text/javascript" src="[% base_url %]js/map.js"></script>
   [% END %]
 
