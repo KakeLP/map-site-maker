@@ -57,7 +57,13 @@ sub parse_yaml {
 
   my @data = LoadFile( $filename );
 
-  @data = sort { $a->{name} cmp $b->{name} } @data;
+  @data = sort { my $an = $a->{name};
+                 my $bn = $b->{name};
+                 foreach ( ( $an, $bn ) ) {
+                   s/^the //i;
+                 }
+                 $an cmp $bn;
+               } @data;
 
   my @shops;
   my ( $min_lat, $max_lat, $min_long, $max_long );
