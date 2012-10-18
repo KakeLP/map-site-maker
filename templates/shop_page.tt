@@ -99,6 +99,11 @@
         (used under <a href="[% shop.photo_license %]">Creative Commons</a>)
       </div>
     [% END %]
+    [% IF shop.photo_date %]
+      <div id="shop_photo_date">
+        Photo taken in [% shop.photo_date | html %]
+      </div>
+    [% END %]
   [% END %]
 </div>
 

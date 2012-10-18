@@ -95,22 +95,40 @@ sub parse_yaml {
 
       my ( $user_id, $photo_id ) =
                           $photo_url =~ m{flickr.com/photos/([^/]+)/(\d+)};
-      my $flickr_info = $flickr_api->execute_method(
-                        "flickr.photos.getSizes", { photo_id => $photo_id } );
-      my @photos = @{ $flickr_info->{sizes}{size} };
 
-      $flickr_info = $flickr_api->execute_method(
+      # Get the right size.
+      my $size_data = $flickr_api->execute_method(
+                        "flickr.photos.getSizes", { photo_id => $photo_id } );
+      my @images = @{ $size_data->{sizes}{size} };
+
+      foreach my $image ( @images ) {
+        if ( $image->{label} eq "Medium" ) {
+          $datum->{photo_url} = $image->{source};
+          $datum->{photo_width} = $image->{width};
+          $datum->{photo_height} = $image->{height};
+        }
+      }
+
+      # Get the photographer and license.
+      my $flickr_info = $flickr_api->execute_method(
                      "flickr.photos.getInfo", { photo_id => $photo_id } );
       my $photo_copyright = $flickr_info->{photo}{owner}{realname};
       $datum->{photo_copyright} = $photo_copyright;
       my $license_id = $flickr_info->{photo}{license};
       $datum->{photo_license} = $licenses{$license_id};
 
-      foreach my $photo ( @photos ) {
-        if ( $photo->{label} eq "Medium" ) {
-          $datum->{photo_url} = $photo->{source};
-          $datum->{photo_width} = $photo->{width};
-          $datum->{photo_height} = $photo->{height};
+      # Get the creation date.
+      my $exif_data = $flickr_api->execute_method(
+                      "flickr.photos.getExif", { photo_id => $photo_id } );
+      my @tags = @{ $exif_data->{photo}{exif} };
+      foreach my $tag ( @tags ) {
+        if ( $tag->{label} eq "Date and Time (Digitized)" ) {
+          my ( $date, $time ) = split( /\s+/, $tag->{raw}{_content} );
+          my ( $year, $month, $day ) = split( ":", $date );
+          my @months = qw( January February March April May June July August
+                           September October November December );
+          $datum->{photo_date} = $months[$month - 1] . " " . $year;
+          last;
         }
       }
     }
