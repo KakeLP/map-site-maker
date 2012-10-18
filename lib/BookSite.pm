@@ -79,6 +79,10 @@ sub parse_yaml {
   }
 
   foreach my $datum ( @data ) {
+    # Skip blanks.
+    if ( !$datum->{name} ) {
+      next;
+    }
     my $open = $datum->{open};
     if ( !$open || ( $open ne "yes" && $open ne "no" ) ) {
       $datum->{open} = "unknown";
