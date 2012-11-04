@@ -40,6 +40,12 @@
       [% END %]
     </td>
   </tr>
+  [% IF shop.phone %]
+    <tr class="shop_phone">
+      <th>Phone number:</th>
+      <td>[% shop.phone | html %]</td>
+    </tr>
+  [% END %]
   [% IF shop.website %]
     <tr class="shop_website">
       <th>Website:</th>
