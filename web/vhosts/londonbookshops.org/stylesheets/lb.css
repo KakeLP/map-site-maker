@@ -166,7 +166,7 @@ div#shop_info table th, td {
 }
 
 div#shop_info table th {
-  width: 6em;
+  white-space: nowrap;
 }
 
 div#shop_info table td ul {
