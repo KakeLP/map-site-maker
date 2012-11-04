@@ -87,7 +87,7 @@
   [% IF shop.description %]
     <tr class="shop_description">
       <th>Notes:</th>
-      <td>[% shop.description | html %]</td>
+      <td>[% shop.description %]</td>
     </tr>
   [% END %]
   </table>
