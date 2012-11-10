@@ -10,7 +10,7 @@
       <li id="list_link">
         <a href="[% base_url %]list.html">Bookshop List</a>
       </li>
-      <li id="msp_link">
+      <li id="map_link">
         <a href="[% base_url %]map.html">Bookshop Map</a>
       </li>
     </ul>
