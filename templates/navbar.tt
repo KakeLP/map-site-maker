@@ -1,17 +1,14 @@
 <div id="navbar_wrapper">
   <div id="navbar">
     <ul id="internal_links">
-      <li id="home_link">
-        <a href="[% base_url %]index.html">Home</a>
-      </li>
-      <li id="about_link">
-        <a href="[% base_url %]about.html">About</a>
-      </li>
       <li id="list_link">
         <a href="[% base_url %]list.html">Bookshop List</a>
       </li>
       <li id="map_link">
         <a href="[% base_url %]map.html">Bookshop Map</a>
+      </li>
+      <li id="about_link">
+        <a href="[% base_url %]about.html">About</a>
       </li>
     </ul>
     <ul id="external_links">
