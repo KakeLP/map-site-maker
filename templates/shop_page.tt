@@ -12,14 +12,14 @@
     <th>Status:</th>
     <td>
       [% IF shop.open %]
-        Open
+        Still in existence
         [% IF shop.checked %]
           (last checked by us in [% shop.checked %])
         [% ELSE %]
           (as far as we know, but not recently checked)
         [% END %]
       [% ELSE %]
-        Closed
+        Closed permanently
           [% IF shop.closed_date %]([% shop.closed_date | html %])[% END %]
           [% IF shop.demolished %] and demolished[% END %]
       [% END %]

@@ -9,7 +9,7 @@
 <div id="shop_list">
 
   <div id="map_key">
-  <p>green = open, red = closed</p>
+  <p>green = still in existence, red = closed permanently</p>
   </div>
 
   <p>Bookshops in London

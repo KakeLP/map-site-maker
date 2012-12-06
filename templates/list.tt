@@ -6,8 +6,8 @@
 
   <div class="shop_table_key">
     <table>
-      <tr><th class="status open"><span>O</span></th><td>= open</td></tr>
-      <tr><th class="status closed"><span>C</span></th><td>= closed</td></tr>
+      <tr><th class="status open"><span>O</span></th><td>= still in existence</td></tr>
+      <tr><th class="status closed"><span>C</span></th><td>= closed permanently</td></tr>
     </table>
   </div>
 
