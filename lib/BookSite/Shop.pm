@@ -93,7 +93,7 @@ RGL, Londonist, etc.
 
 sub has_links {
   my $self = shift;
-  foreach my $key ( qw( rgl londonist reading_matters thebookguide
+  foreach my $key ( qw( rgl londonist reading_matters thebookguide tol
                         other_links ) ) {
     if ( $self->{$key} ) {
       return 1;

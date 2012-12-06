@@ -70,8 +70,8 @@
       [% IF shop.rgl %]
         <li><a href="[% shop.rgl | html %]">Randomness Guide to London</a></li>
       [% END %]
-      [% IF shop.londonist %]
-        <li><a href="[% shop.londonist | html %]">Londonist</a></li>
+      [% IF shop.tol %]
+        <li><a href="[% shop.tol | html %]">Tired of London, Tired of Life</a></li>
       [% END %]
       [% IF shop.reading_matters %]
         <li><a href="[% shop.reading_matters | html %]">Reading Matters</a>
