@@ -32,7 +32,7 @@
     [% FOREACH point = points %]
       <Placemark>
         <name>
-          [% point.name %]
+          [% point.name | html %]
         </name>
         [% IF point.style %]
           <styleUrl>#[% point.style %]</styleUrl>
