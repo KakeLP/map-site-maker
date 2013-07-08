@@ -14,7 +14,7 @@
       [% IF shop.open %]
         Still in existence
         [% IF shop.checked %]
-          (last checked by us in [% shop.checked %])
+          (last checked in [% shop.checked %])
         [% ELSE %]
           (as far as we know, but not recently checked)
         [% END %]
@@ -72,6 +72,9 @@
       [% END %]
       [% IF shop.tol %]
         <li><a href="[% shop.tol | html %]">Tired of London, Tired of Life</a></li>
+      [% END %]
+      [% IF shop.londonist %]
+        <li><a href="[% shop.londonist | html %]">Londonist</a></li>
       [% END %]
       [% IF shop.reading_matters %]
         <li><a href="[% shop.reading_matters | html %]">Reading Matters</a>
