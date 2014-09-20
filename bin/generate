@@ -50,9 +50,6 @@ make_path( "site/$entity_type" );
 # Copy over the static stuff.
 dircopy( "static", "site" ) or die $!;
 
-# Copy over the assets (CSS, JS).
-dircopy( "assets", "site" ) or die $!;
-
 # Set up template stuff.
 my $tt_config = {
   INCLUDE_PATH => "templates/",
@@ -106,6 +103,14 @@ write_index_page( index_file => $index_file, entities => \@entities,
                   map_url => $map_url );
 
 write_kml_file( entities => \@entities, kml_file => $kml_file );
+
+# Copy over the assets (CSS, JS).  Some of these are generated.
+dircopy( "assets", "site" ) or die $!;
+my $tt_vars = \%tt_base_vars;
+my $template = "map.js.tt";
+open( my $output_fh, ">", "site/js/map.js" ) or die $!;
+$tt->process( $template, $tt_vars, $output_fh ) or die $tt->error;
+close $output_fh;
 
 # If we get this far then hopefully we've succeeded.
 print "OK, done (generated website is in site/).\n";
