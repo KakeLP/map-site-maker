@@ -16,7 +16,8 @@ use YAML::XS qw( LoadFile );
 my $conf_file = "conf/mapsite.conf";
 my $conf = Config::Tiny->read( $conf_file )
   or die "Can't read config file $conf_file: $Config::Tiny::errstr";
-my $base_url = $conf->{_}->{base_url} || "";
+my $base_url = $conf->{_}->{base_url}
+  or die "base_url not specified in $conf_file.\n";
 
 my $flickr_conf = Config::Tiny->read( "conf/flickr_secrets.conf" )
   or die "Can't read config file: $Config::Tiny::errstr";
