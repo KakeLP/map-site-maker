@@ -148,6 +148,7 @@ sub write_map_page {
 
   my $template = "map.tt";
   open( my $output_fh, ">", "site/" . $args{map_file} ) or die $!;
+  binmode $output_fh, ":encoding(UTF-8)";
   $tt->process( $template, $tt_vars, $output_fh )
     or die $tt->error;
 }
@@ -163,6 +164,7 @@ sub write_index_page {
 
   my $template = "list.tt";
   open( my $output_fh, ">", "site/" . $args{index_file} ) or die $!;
+  binmode $output_fh, ":encoding(UTF-8)";
   $tt->process( $template, $tt_vars, $output_fh )
     or die $tt->error;
 }
@@ -199,6 +201,7 @@ sub write_kml_file {
   # NB FIX THE BELOW as existing sites want the KML in data/
   my $template = "kml.tt";
   open( my $output_fh, ">", "site/" . $args{kml_file} ) or die $!;
+  binmode $output_fh, ":encoding(UTF-8)";
   $tt->process( $template, $tt_vars, $output_fh )
     or die $tt->error;
 }
