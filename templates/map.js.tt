@@ -1,6 +1,5 @@
 var min_lat, min_long, max_lat, max_long, centre_lat, centre_long, map;
 var positions = [], markers = [];
-var base_url = "[% base_url %]";
 var icons = {};
 
 var gicon_green = L.Icon.extend( {
@@ -71,8 +70,8 @@ function add_marker( i, entity ) {
   marker = new L.Marker( position, { icon: icon } );
   map.addLayer( marker );
 
-  content = '<a href="' + base_url + '[% entity_type %]/' + entity.id + '.html">' +
-            entity.name + '</a>';
+  content = '<a href="[% base_url %][% entity_type %]/' + entity.id +
+            '.html">' + entity.name + '</a>';
   if ( !entity.open ) {
     content = content + ' (closed)';
   }
