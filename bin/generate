@@ -6,7 +6,7 @@ use lib "lib";
 use MapSite;
 
 use Config::Tiny;
-use File::Copy;
+use File::Copy::Recursive qw( dircopy );
 use File::Path qw( make_path remove_tree );
 use POSIX qw( strftime );
 use Template;
@@ -46,6 +46,9 @@ if ( $err ) {
 make_path( "site" );
 make_path( "site/$entity_type" );
 
+# Copy over the static stuff.
+dircopy( "static", "site" ) or die $!;
+
 # Set up template stuff.
 my $tt_config = {
   INCLUDE_PATH => "templates/",
@@ -75,6 +78,7 @@ my @entities = @{ $data{entities} };
 my ( $min_lat, $max_lat, $min_long, $max_long )
   = @data{ qw( min_lat max_lat min_long max_long ) };
 
+# Generate the pages that need generating.
 my $map_file = "map.html";
 my $map_url = $base_url . $map_file;
 my $index_file = "list.html";

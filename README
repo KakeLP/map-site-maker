@@ -23,6 +23,11 @@ You probably want to put a full stop at the end.
 site_name = a pretty title for the site, e.g. London Bookshop Map
 
 
+* If you want anything copied over directly to the site, put it in static/
+Note that if you use filenames the same as generated files, the static files
+will be overwritten with the generated ones.
+
+
 * The site will be generated in site/ - every time you run "generate", this
 directory will be created if necessary and cleared out if necessary.
 
