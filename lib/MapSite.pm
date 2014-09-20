@@ -1,19 +1,18 @@
-package BookSite;
+package MapSite;
 use strict;
 
-use BookSite::Shop;
-#use CGI;
+use MapSite::Entity;
 use YAML::XS qw( LoadFile );
 
 our $errstr;
 
 =head1 NAME
 
-BookSite - Makes the London Bookshop Map site.
+MapSite - Makes websites like the London Bookshop Map site.
 
 =head1 DESCRIPTION
 
-A set of tools for turning YAML into a website.
+A set of tools for turning YAML into a map-enabled website.
 
 =head1 METHODS
 
@@ -25,7 +24,7 @@ A set of tools for turning YAML into a website.
   # supply both key and secret.  If one or both is missing then check_flickr
   # will be set to 0.
 
-  my %data = BookSite->parse_yaml(
+  my %data = MapSite->parse_yaml(
                                    file          => "datafile.yaml",
                                    check_flickr  => 1, # or 0
                                    flickr_key    => "mykey",
@@ -36,7 +35,7 @@ Returns a hash:
 
 =over
 
-=item shops - ref to an array of BookSite::Shop objects;
+=item entities - ref to an array of MapSite::Entity objects;
 
 =item min_lat, max_lat, min_long, max_long - scalars
 
@@ -55,7 +54,10 @@ sub parse_yaml {
     $check_flickr = 0;
   }
 
+  # Load the YAML and throw away any blank data items (due to trailing
+  # separators etc).
   my @data = LoadFile( $filename );
+  @data = grep { defined $_ } @data;
 
   @data = sort { my $an = lc( $a->{name} );
                  my $bn = lc( $b->{name} );
@@ -67,7 +69,7 @@ sub parse_yaml {
                  $an cmp $bn;
                } @data;
 
-  my @shops;
+  my @entities;
   my ( $min_lat, $max_lat, $min_long, $max_long );
 
   my ( $flickr_api, %licenses );
@@ -147,14 +149,14 @@ sub parse_yaml {
       }
     }
 
-    my $shop = BookSite::Shop->new( %$datum );
-    push @shops, $shop;
+    my $entity = MapSite::Entity->new( %$datum );
+    push @entities, $entity;
 
-    if ( $shop->not_on_map ) {
+    if ( $entity->not_on_map ) {
       next;
     }
 
-    my ( $lat, $long ) = $shop->lat_and_long;
+    my ( $lat, $long ) = $entity->lat_and_long;
 
     if ( !defined $min_lat ) {
       $min_lat = $max_lat = $lat;
@@ -173,7 +175,7 @@ sub parse_yaml {
   }
 
   return (
-           shops => \@shops,
+           entities => \@entities,
            min_lat => $min_lat,
            max_lat => $max_lat,
            min_long => $min_long,

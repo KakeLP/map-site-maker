@@ -1,10 +1,10 @@
-package BookSite::Shop;
+package MapSite::Entity;
 use strict;
 
 use Flickr::API2;
 
 use base qw( Class::Accessor );
-BookSite::Shop->mk_accessors( qw(
+MapSite::Entity->mk_accessors( qw(
     id name address lat long description photo photo_copyright photo_license
     new secondhand charity open checked
     website blog twitter rgl londonist reading_matters thebookguide
@@ -12,7 +12,7 @@ BookSite::Shop->mk_accessors( qw(
 
 =head1 NAME
 
-BookSite::Shop - Model a single shop for the London bookshop map.
+MapSite::Entity - Model e.g. a single shop for the London bookshop map.
 
 =head1 DESCRIPTION
 
@@ -24,7 +24,7 @@ Object modelling a single shop.
 
 =item B<new>
 
-  my $shop = BookSite::Shop->new(
+  my $entity = MapSite::Entity->new(
     id => 12345,
     name => "A Book Shop",
     open => "yes",
@@ -33,7 +33,7 @@ Object modelling a single shop.
     lat => 51.00000,
     long => 0.10000,
     website => "http://example.com/bookshop/",
-    rgl => "http://london.randomness.org.uk/wiki.cgi?A_Book_Shop",
+    rgl => "http://london.randomness.org.uk/wiki.cgi?A_Book_Entity",
     description => "This shop is an imaginary one, and it has now closed.",
     photo => "http://www.flickr.com/photos/kake_pugh/1234567890/",
     photo_url => "http://farm7.static.flickr.com/123456.jpg",
@@ -52,7 +52,7 @@ sub new {
 
 =item B<lat_and_long>
 
-Returns an array containing the shop's latitude and longitude.  If one
+Returns an array containing the entity's latitude and longitude.  If one
 of both of these data are missing, returns undef.
 
 =cut
@@ -84,9 +84,9 @@ sub not_on_map {
 
 =item B<has_links>
 
-  my $boolean = $shop->has_links;
+  my $boolean = $entity->has_links;
 
-Returns true if and only if the shop has at least one associated link, e.g.
+Returns true if and only if the entity has at least one associated link, e.g.
 RGL, Londonist, etc.
 
 =cut
@@ -106,7 +106,7 @@ sub has_links {
 
 You can access any of the things you put in when you called new(), e.g.
 
-  my $notes = $shop->description;
+  my $notes = $entity->description;
 
 =back
 

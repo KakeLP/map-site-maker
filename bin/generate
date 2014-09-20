@@ -1,0 +1,184 @@
+#!/usr/bin/perl -w
+
+use strict;
+use lib "lib";
+
+use MapSite;
+
+use Config::Tiny;
+use File::Copy;
+use File::Path qw( make_path remove_tree );
+use POSIX qw( strftime );
+use Template;
+use YAML::XS qw( LoadFile );
+
+# Read the config files.
+my $conf_file = "conf/mapsite.conf";
+my $conf = Config::Tiny->read( $conf_file )
+  or die "Can't read config file $conf_file: $Config::Tiny::errstr";
+my $base_url = $conf->{_}->{base_url} || "";
+
+my $flickr_conf = Config::Tiny->read( "conf/flickr_secrets.conf" )
+  or die "Can't read config file: $Config::Tiny::errstr";
+
+# Make sure we actually have a datafile, and that we can read it.
+my $datafile = $conf->{_}->{datafile}
+  or die "Datafile not specified in $conf_file.\n";
+LoadFile( $datafile ); # This will die for us if there's an error.
+
+# Make sure we know what type of thing we're modelling.
+my $entity_type = $conf->{_}->{entity_type}
+  or die "Entity type not specified in $conf_file.\n";
+
+# Clear out and recreate the directory that the site will be generated into.
+my $err;
+remove_tree( "site", { error => $err } );
+if ( $err ) {
+  for my $diag ( @$err ) {
+    my ( $file, $message ) = %$diag;
+      if ( $file ) {
+        die "Problem unlinking $file: $message.\n";
+      } else {
+        die "General error: $message.\n";
+      }
+  }
+}
+make_path( "site" );
+make_path( "site/$entity_type" );
+
+# Set up template stuff.
+my $tt_config = {
+  INCLUDE_PATH => "templates/",
+  OUTPUT_PATH => "site/",
+};
+my $tt = Template->new( $tt_config ) or croak Template->error;
+my %tt_base_vars = ( base_url => $base_url );
+
+# Set up Flickr stuff.
+my $flickr_key    = $flickr_conf->{_}->{flickr_key}    || "";
+my $flickr_secret = $flickr_conf->{_}->{flickr_secret} || "";
+
+# Parse the YAML.
+my %data = MapSite->parse_yaml(
+  file          => $datafile,
+  check_flickr  => 0,
+  flickr_key    => $flickr_key,
+  flickr_secret => $flickr_secret,
+);
+my @entities = @{ $data{entities} };
+
+my ( $min_lat, $max_lat, $min_long, $max_long )
+  = @data{ qw( min_lat max_lat min_long max_long ) };
+
+my $map_file = "map.html";
+my $map_url = $base_url . $map_file;
+my $index_file = "list.html";
+my $index_url = $base_url . $index_file;
+my $kml_file = $conf->{_}->{kml_filename} || "$entity_type.kml";
+my $kml_url = $base_url . $kml_file;
+
+foreach my $entity ( @entities ) {
+  write_entity_page( entity => $entity, map_url => $map_url,
+                     index_url => $index_url );
+}
+
+write_map_page( entities => \@entities, map_file => $map_file,
+  index_url => $index_url,
+  min_lat => $min_lat, max_lat => $max_lat,
+  min_long => $min_long, max_long => $max_long );
+
+write_index_page( index_file => $index_file, entities => \@entities,
+                  map_url => $map_url );
+
+write_kml_file( entities => \@entities, kml_file => $kml_file );
+
+# If we get this far then hopefully we've succeeded.
+print "OK, done (generated website is in site/).\n";
+
+sub write_entity_page {
+  my %args = @_;
+  my $tt_vars = { %args, %tt_base_vars };
+  my $template = "entity_page.tt";
+
+  open( my $output_fh, ">", "site/$entity_type/" . $args{entity}{id}
+        . ".html" )
+      or die $!;
+  $tt->process( $template, $tt_vars, $output_fh )
+    or die $tt->error;
+}
+
+sub get_time {
+  # strftime on nimbus doesn't have %P
+  return strftime( "%l:%M", localtime )
+         . lc( strftime( "%p", localtime ) )
+         . strftime( " on %A %e %B %Y", localtime );
+}
+
+sub write_map_page {
+  my %args = @_;
+
+  my $tt_vars = {
+    %tt_base_vars,
+    %args,
+    centre_lat => ( ( $args{max_lat} + $args{min_lat} ) / 2 ),
+    centre_long => ( ( $args{max_long} + $args{min_long} ) / 2 ),
+    updated => get_time(),
+  };
+
+  my $template = "map.tt";
+  open( my $output_fh, ">", "site/" . $args{map_file} ) or die $!;
+  $tt->process( $template, $tt_vars, $output_fh )
+    or die $tt->error;
+}
+
+sub write_index_page {
+  my %args = @_;
+
+  my $tt_vars = {
+    %tt_base_vars,
+    %args,
+    updated => get_time(),
+  };
+
+  my $template = "list.tt";
+  open( my $output_fh, ">", "site/" . $args{index_file} ) or die $!;
+  $tt->process( $template, $tt_vars, $output_fh )
+    or die $tt->error;
+}
+
+sub write_kml_file {
+  my %args = @_;
+  my @entities = @{$args{entities}};
+
+  my @points;
+  foreach my $entity ( @entities ) {
+    if ( !$entity->lat || !$entity->long ) {
+      next;
+    }
+    my %data = (
+                 name => $entity->name,
+                 long => $entity->long,
+                 lat => $entity->lat,
+                 address => $entity->address,
+                 url => "$base_url$entity_type/" . $entity->id . ".html",
+               );
+    if ( $entity->open ne "yes" ) {
+      $data{style} = "red";
+    } else {
+      $data{style} = "green";
+    }
+    push @points, \%data;
+  }
+
+  my $tt_vars = {
+    %tt_base_vars,
+    points => \@points,
+  };
+
+  # NB FIX THE BELOW as existing sites want the KML in data/
+  my $template = "kml.tt";
+  open( my $output_fh, ">", "site/" . $args{kml_file} ) or die $!;
+  $tt->process( $template, $tt_vars, $output_fh )
+    or die $tt->error;
+}
+
