@@ -10,7 +10,7 @@ use File::Copy::Recursive qw( dircopy );
 use File::Path qw( make_path remove_tree );
 use POSIX qw( strftime );
 use Template;
-use YAML::XS qw( LoadFile );
+use YAML::XS qw( Dump LoadFile );
 
 # Read the config files.
 my $conf_file = "conf/mapsite.conf";
@@ -91,6 +91,8 @@ my $kml_file = $conf->{_}->{kml_filename} || "$entity_type.kml";
 my $kml_url = $base_url . $kml_file;
 
 foreach my $entity ( @entities ) {
+  # At a minimum we need an ID.
+  die "Missing ID for entity:\n" . Dump( $entity ) unless $entity->{id};
   write_entity_page( entity => $entity, map_url => $map_url,
                      index_url => $index_url );
 }
