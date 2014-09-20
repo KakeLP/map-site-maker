@@ -103,6 +103,7 @@ sub write_entity_page {
   open( my $output_fh, ">", "site/$entity_type/" . $args{entity}{id}
         . ".html" )
       or die $!;
+  binmode $output_fh, ":encoding(UTF-8)"; # Avoid "Wide character in print".
   $tt->process( $template, $tt_vars, $output_fh )
     or die $tt->error;
 }
