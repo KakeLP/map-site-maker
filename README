@@ -25,9 +25,11 @@ site_name = a pretty title for the site, e.g. London Bookshop Map
 
 * If you want anything copied over directly to the site, put it in static/
 Note that if you use filenames the same as generated files, the static files
-will be overwritten with the generated ones.
+will be overwritten in site/ with the generated ones.  Similarly, if you
+use any filenames used in assets/ then your files will be overwritten in site/.
+Note also that this doesn't exclude e.g. emacs backup files - it just copies
+them over like any other file.
 
 
 * The site will be generated in site/ - every time you run "generate", this
 directory will be created if necessary and cleared out if necessary.
-

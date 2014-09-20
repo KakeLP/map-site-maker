@@ -49,6 +49,9 @@ make_path( "site/$entity_type" );
 # Copy over the static stuff.
 dircopy( "static", "site" ) or die $!;
 
+# Copy over the assets (CSS, JS).
+dircopy( "assets", "site" ) or die $!;
+
 # Set up template stuff.
 my $tt_config = {
   INCLUDE_PATH => "templates/",
