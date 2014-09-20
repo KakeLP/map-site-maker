@@ -2,10 +2,10 @@
   <div id="navbar">
     <ul id="internal_links">
       <li id="list_link">
-        <a href="[% base_url %]list.html">Bookshop List</a>
+        <a href="[% base_url %]list.html">List of [% entity_type %]</a>
       </li>
       <li id="map_link">
-        <a href="[% base_url %]map.html">Bookshop Map</a>
+        <a href="[% base_url %]map.html">Map of [% entity_type %]</a>
       </li>
       <li id="about_link">
         <a href="[% base_url %]about.html">About</a>
@@ -13,7 +13,7 @@
     </ul>
     <ul id="external_links">
       <li>
-        <a href="http://londonbookshops.org/links.html">Links</a>
+        <a href="[% base_url %]links.html">Links</a>
       </li>
     </ul>
   </div>

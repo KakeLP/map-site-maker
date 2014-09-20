@@ -6,25 +6,25 @@
 
 <div id="map_canvas"></div>
 
-<div id="shop_list">
+<div id="entity_list">
 
   <div id="map_key">
   <p>green = still in existence, red = closed permanently</p>
   </div>
 
-  <p>Bookshops in London
+  <p>All [% entity_type %]
      (<a href="[% index_url %]">view without a map</a>):</p>
   <ul>
     [% i = 0 %]
-    [% FOREACH shop = shops %]
+    [% FOREACH entity = entities %]
       [% i = i + 1 %]
       <li>
         <span>
-        [% IF shop.not_on_map %]
-          [% CGI.escapeHTML( shop.name ) %] (not on map &#8212;
-          <a href="[% base_url %]shops/[% shop.id %].html">view shop info</a>)
+        [% IF entity.not_on_map %]
+          [% CGI.escapeHTML( entity.name ) %] (not on map &#8212;
+          <a href="[% base_url %][% entity_type %]/[% entity.id %].html">view info</a>)
         [% ELSE %]
-          <a href="#" onclick="return show_marker( [% i %] )">[% CGI.escapeHTML( shop.name ) %]</a>
+          <a href="#" onclick="return show_marker( [% i %] )">[% CGI.escapeHTML( entity.name ) %]</a>
         [% END %]
         </span>
       </li>
@@ -45,12 +45,12 @@
   centre_long = [% centre_long %];
 
   function add_markers() {
-    var shop;
+    var entity;
     [% i = 0 %]
-    [% FOREACH shop = shops %]
+    [% FOREACH entity = entities %]
       [% i = i + 1 %]
-      shop = [% shop.json %];
-      add_marker( [% i %], shop );
+      entity = [% entity.json %];
+      add_marker( [% i %], entity );
     [% END %]
   }
 </script>

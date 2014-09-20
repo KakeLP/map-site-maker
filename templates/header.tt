@@ -4,9 +4,9 @@
 <head>
   <title>[% IF subtitle %][% subtitle %]: [% END %][% site_name %]</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="description" content="A carefully-assembled map and list of London's bookshops.[% IF updated %]  Last updated at [% updated | html %].[% END %]" />
+  <meta name="description" content="[% site_description %][% IF updated %]  Last updated at [% updated | html %].[% END %]" />
 
-  <link rel="stylesheet" href="[% base_url %]stylesheets/lb.css" type="text/css" />
+  <link rel="stylesheet" href="[% base_url %]stylesheets/main.css" type="text/css" />
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.css" />
   <!--[if lte IE 8]>
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.ie.css" />
@@ -15,7 +15,7 @@
   <script type="text/javascript" 
       src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"> 
   </script>
-  <script type="text/javascript" src="[% base_url %]js/lb.js"></script>
+  <script type="text/javascript" src="[% base_url %]js/main.js"></script>
 
   [% IF do_map %]
     <script src="http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"></script>
@@ -29,7 +29,7 @@
 <div id="body_wrapper">
 
   <div id="banner">
-    <h1 class="page_header"><a href="[% base_url %]">London Bookshop Map</a></h1>
+    <h1 class="page_header"><a href="[% base_url %]">[% site_name %]</a></h1>
   </div>
 
   [% INCLUDE navbar.tt %]

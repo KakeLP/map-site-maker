@@ -3,11 +3,11 @@
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
   <Document>
 
- <name>London Bookshops KML file</name>
+ <name>[% site_name %] KML</name>
 <atom:author>      
-      <atom:name>London Bookshop Map</atom:name>
+      <atom:name>[% site_name %]</atom:name>
     </atom:author>    
-    <atom:link href="http://londonbookshops.org/" rel="related" />  
+    <atom:link href="[% base_url %]" rel="related" />  
     <Style id="green">
       <IconStyle>
         <Icon>
@@ -45,7 +45,7 @@
             [% IF point.address %]
               [% point.address %]<br>
             [% END %]
-            <a href="[% point.url %]">London Bookshop Map entry</a>
+            <a href="[% point.url %]">[% site_name %] entry</a>
           ]]>
         </description>
       </Placemark>

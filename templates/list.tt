@@ -2,31 +2,31 @@
 
 [% INCLUDE header.tt %]
 
-<div id="shop_list_no_map">
+<div id="entity_list_no_map">
 
-  <div class="shop_table_key">
+  <div class="entity_table_key">
     <table>
       <tr><th class="status open"><span>O</span></th><td>= still in existence</td></tr>
       <tr><th class="status closed"><span>C</span></th><td>= closed permanently</td></tr>
     </table>
   </div>
 
-  <p>Bookshops in London
+  <p>All [% entity_type %]
      (<a href="[% map_url %]">view them on a map</a>):</p>
 
-  <table class="shop_list">
+  <table class="entity_list">
     <tr>
       <th></th><th>Name</th><th>Address</th>
     </tr>
-    [% FOREACH shop = shops %]
+    [% FOREACH entity = entities %]
       <tr>
-        [% IF shop.open %]
+        [% IF entity.open %]
           <td class="status open"><span>O</span></td>
         [% ELSE %]
           <td class="status closed"><span>C</span></td>
         [% END %]
-        <td><a href="[% base_url %]shops/[% shop.id | html %].html">[% shop.name | html %]</a></td>
-        <td>[% shop.address | html %]</td>
+        <td><a href="[% base_url %][% entity_type %]/[% entity.id | html %].html">[% entity.name | html %]</a></td>
+        <td>[% entity.address | html %]</td>
       </tr>
     [% END %]
   </table>
