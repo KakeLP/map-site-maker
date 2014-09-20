@@ -16,6 +16,7 @@ This is used to form URLs e.g. http://londonbookshops.org/shops/gosh.html
 kml_filename = a filename for the KML that will be generated
 (e.g. bookshops.kml).  This will default to $entity_type.kml
 
+site_name = a pretty title for the site, e.g. London Bookshop Map
 
 * The site will be generated in site/ - every time you run "generate", this
 directory will be created if necessary and cleared out if necessary.

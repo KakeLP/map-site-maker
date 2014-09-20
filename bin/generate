@@ -52,7 +52,10 @@ my $tt_config = {
   OUTPUT_PATH => "site/",
 };
 my $tt = Template->new( $tt_config ) or croak Template->error;
-my %tt_base_vars = ( base_url => $base_url );
+my %tt_base_vars = (
+  base_url => $base_url,
+  site_name => $conf->{_}->{site_name} || "A MapSite website that hasn't configured its site_name",
+);
 
 # Set up Flickr stuff.
 my $flickr_key    = $flickr_conf->{_}->{flickr_key}    || "";

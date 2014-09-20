@@ -16,7 +16,7 @@ MapSite::Entity - Model e.g. a single shop for the London bookshop map.
 
 =head1 DESCRIPTION
 
-Object modelling a single shop.
+Object modelling a single entity to be plotted on the map.
 
 =head1 METHODS
 

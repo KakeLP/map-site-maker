@@ -1,116 +1,116 @@
-[% subtitle = shop.name | html %]
-[% subtitle_class = "shop_name" %]
+[% subtitle = entity.name | html %]
+[% subtitle_class = "entity_name" %]
 [% INCLUDE header.tt %]
 
-[% IF shop.photo_url %]
-  <div id="shop_info" class="shop_info_with_photo">
+[% IF entity.photo_url %]
+  <div id="entity_info" class="entity_info_with_photo">
 [% ELSE %]
-  <div id="shop_info">
+  <div id="entity_info">
 [% END %]
   <table>
-  <tr class="shop_status">
+  <tr class="entity_status">
     <th>Status:</th>
     <td>
-      [% IF shop.open %]
+      [% IF entity.open %]
         Still in existence
-        [% IF shop.checked %]
-          (last checked in [% shop.checked %])
+        [% IF entity.checked %]
+          (last checked in [% entity.checked %])
         [% ELSE %]
           (as far as we know, but not recently checked)
         [% END %]
       [% ELSE %]
         Closed permanently
-          [% IF shop.closed_date %]([% shop.closed_date | html %])[% END %]
-          [% IF shop.demolished %] and demolished[% END %]
+          [% IF entity.closed_date %]([% entity.closed_date | html %])[% END %]
+          [% IF entity.demolished %] and demolished[% END %]
       [% END %]
     </td>
   </tr>
-  <tr class="shop_address">
+  <tr class="entity_address">
     <th>Address:</th>
     <td>
-      [% shop.address | html %]
-      [% IF shop.os_x AND shop.os_y %]
-        (<a href="http://streetmap.co.uk/map.srf?x=[% shop.os_x | html %]&y=[% shop.os_y | html %]">streetmap</a>)
+      [% entity.address | html %]
+      [% IF entity.os_x AND entity.os_y %]
+        (<a href="http://streetmap.co.uk/map.srf?x=[% entity.os_x | html %]&y=[% entity.os_y | html %]">streetmap</a>)
       [% END %]
-      [% IF shop.lat_and_long %]
-        (<a href="http://www.openstreetmap.org/?mlat=[% shop.lat | html %]&amp;mlon=[% shop.long | html %]&amp;zoom=15">osm</a>)
-        (<a href="http://maps.google.co.uk/maps?q=[% FILTER replace( '\s', '+' ) %][% node_name %][% END %]@[% shop.lat %],[% shop.long %]&z=15">gmap</a>)
-        (<a href="http://www.bing.com/maps/default.aspx?cp=[% shop.lat %]~[% shop.long %]&style=c&lvl=15&rtp=~pos.[% shop.lat %]_[% shop.long %]_[% node_name | replace( '\s', '+' ) %]">bingmap</a>)
-        (<a href="http://maps.google.co.uk/maps?q=[% shop.lat %],[% shop.long %]&cbll=[% shop.lat %],[% shop.long %]&layer=c&cbp=12,0,,0,5">streetview</a>)
+      [% IF entity.lat_and_long %]
+        (<a href="http://www.openstreetmap.org/?mlat=[% entity.lat | html %]&amp;mlon=[% entity.long | html %]&amp;zoom=15">osm</a>)
+        (<a href="http://maps.google.co.uk/maps?q=[% FILTER replace( '\s', '+' ) %][% node_name %][% END %]@[% entity.lat %],[% entity.long %]&z=15">gmap</a>)
+        (<a href="http://www.bing.com/maps/default.aspx?cp=[% entity.lat %]~[% entity.long %]&style=c&lvl=15&rtp=~pos.[% entity.lat %]_[% entity.long %]_[% node_name | replace( '\s', '+' ) %]">bingmap</a>)
+        (<a href="http://maps.google.co.uk/maps?q=[% entity.lat %],[% entity.long %]&cbll=[% entity.lat %],[% entity.long %]&layer=c&cbp=12,0,,0,5">streetview</a>)
       [% END %]
     </td>
   </tr>
-  [% IF shop.phone %]
-    <tr class="shop_phone">
+  [% IF entity.phone %]
+    <tr class="entity_phone">
       <th>Phone number:</th>
-      <td>[% shop.phone | html %]</td>
+      <td>[% entity.phone | html %]</td>
     </tr>
   [% END %]
-  [% IF shop.website %]
-    <tr class="shop_website">
+  [% IF entity.website %]
+    <tr class="entity_website">
       <th>Website:</th>
-      <td><a href="[% shop.website | html %]">Website</a></td>
+      <td><a href="[% entity.website | html %]">Website</a></td>
     </tr>
   [% END %]
-  [% IF shop.blog %]
-    <tr class="shop_blog">
+  [% IF entity.blog %]
+    <tr class="entity_blog">
       <th>Blog:</th>
-      <td><a href="[% shop.blog | html %]">Blog</a></td>
+      <td><a href="[% entity.blog | html %]">Blog</a></td>
     </tr>
   [% END %]
-  [% IF shop.twitter %]
-    <tr class="shop_twitter">
+  [% IF entity.twitter %]
+    <tr class="entity_twitter">
       <th>Twitter:</th>
-      <td><a href="http://twitter.com/[% shop.twitter | html %]">@[% shop.twitter | html %]</a></td>
+      <td><a href="http://twitter.com/[% entity.twitter | html %]">@[% entity.twitter | html %]</a></td>
     </tr>
   [% END %]
-  [% IF shop.has_links %]
-    <tr class="shop_links"><th>Links:</th>
+  [% IF entity.has_links %]
+    <tr class="entity_links"><th>Links:</th>
     <td><ul>
-      [% IF shop.rgl %]
-        <li><a href="[% shop.rgl | html %]">Randomness Guide to London</a></li>
+      [% IF entity.rgl %]
+        <li><a href="[% entity.rgl | html %]">Randomness Guide to London</a></li>
       [% END %]
-      [% IF shop.tol %]
-        <li><a href="[% shop.tol | html %]">Tired of London, Tired of Life</a></li>
+      [% IF entity.tol %]
+        <li><a href="[% entity.tol | html %]">Tired of London, Tired of Life</a></li>
       [% END %]
-      [% IF shop.londonist %]
-        <li><a href="[% shop.londonist | html %]">Londonist</a></li>
+      [% IF entity.londonist %]
+        <li><a href="[% entity.londonist | html %]">Londonist</a></li>
       [% END %]
-      [% IF shop.reading_matters %]
-        <li><a href="[% shop.reading_matters | html %]">Reading Matters</a>
+      [% IF entity.reading_matters %]
+        <li><a href="[% entity.reading_matters | html %]">Reading Matters</a>
         </li>
       [% END %]
-      [% IF shop.thebookguide %]
-        <li><a href="[% shop.thebookguide | html %]">TheBookGuide</a>
+      [% IF entity.thebookguide %]
+        <li><a href="[% entity.thebookguide | html %]">TheBookGuide</a>
         </li>
       [% END %]
-      [% shop.other_links %]
+      [% entity.other_links %]
     </ul></td></tr>
   [% END %]
-  [% IF shop.description %]
-    <tr class="shop_description">
+  [% IF entity.description %]
+    <tr class="entity_description">
       <th>Notes:</th>
-      <td>[% shop.description %]</td>
+      <td>[% entity.description %]</td>
     </tr>
   [% END %]
   </table>
 </div>
 
-<div id="shop_photo">
-  [% IF shop.photo_url %]
+<div id="entity_photo">
+  [% IF entity.photo_url %]
     <div id="photo">
-      <a href="[% shop.photo | html %]"><img class="shop_photo" src="[% shop.photo_url | html %]" width="[% shop.photo_width | html %]" height="[% shop.photo_height | html %]"></a>
+      <a href="[% entity.photo | html %]"><img class="entity_photo" src="[% entity.photo_url | html %]" width="[% entity.photo_width | html %]" height="[% entity.photo_height | html %]"></a>
     </div>
-    [% IF shop.photo_copyright AND shop.photo_license %]
+    [% IF entity.photo_copyright AND entity.photo_license %]
       <div id="photo_copyright">
-        <a href="[% shop.photo | html %]">Photo &copy;
-        [% shop.photo_copyright | html %]</a>
-        (used under <a href="[% shop.photo_license %]">Creative Commons</a>)
+        <a href="[% entity.photo | html %]">Photo &copy;
+        [% entity.photo_copyright | html %]</a>
+        (used under <a href="[% entity.photo_license %]">Creative Commons</a>)
       </div>
     [% END %]
-    [% IF shop.photo_date %]
-      <div id="shop_photo_date">
-        Photo taken in [% shop.photo_date | html %]
+    [% IF entity.photo_date %]
+      <div id="entity_photo_date">
+        Photo taken in [% entity.photo_date | html %]
       </div>
     [% END %]
   [% END %]

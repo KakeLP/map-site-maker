@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>[% IF subtitle %][% subtitle %]: [% END %]London Bookshop Map</title>
+  <title>[% IF subtitle %][% subtitle %]: [% END %][% site_name %]</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="description" content="A carefully-assembled map and list of London's bookshops.[% IF updated %]  Last updated at [% updated | html %].[% END %]" />
 
