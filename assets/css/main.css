@@ -1,9 +1,4 @@
-html {
-  height: 100%;
-}
-
 body {
-  height: 100%;
   margin: 0;
   padding: 0;
   background-color: #e0e0e0;
@@ -79,7 +74,7 @@ div#front_page_text {
   padding-top: 0.5em;
 }
 
-div.shop_table_key th.status span {
+div.entity_table_key th.status span {
   font-size: 0.8em;
   font-weight: bold;
   border: thin solid black;
@@ -88,34 +83,34 @@ div.shop_table_key th.status span {
   display: block;
 }
 
-div.shop_table_key {
+div.entity_table_key {
   float: right;
   padding-bottom: 1em;
 }
 
-table.shop_list th {
+table.entity_list th {
   text-align: left;
   padding-left: 0.5em;
 }
 
-table.shop_list td.status {
+table.entity_list td.status {
   font-size: 0.8em;
   font-weight: bold;
 }
 
-table.shop_list td.status span {
+table.entity_list td.status span {
   border: thin solid black;
   width: 1.5em;
   display: block;
   text-align: center;
 }
 
-table.shop_list td.closed span,
+table.entity_list td.closed span,
   div.shop_table_key th.closed span {
   background-color: #fc6355;
 }
 
-table.shop_list td.open span,
+table.entity_list td.open span,
   div.shop_table_key th.open span {
   background-color: #00e13c;
 }
@@ -129,70 +124,57 @@ div#map_key {
   padding-top: 1em;
 }
 
-div#shop_list {
+div#entity_list {
   float: left;
   max-width: 20%;
   height: 90%;
   margin-top: -2em;
 }
 
-div#shop_list ul {
+div#entity_list ul {
   height: 400px;
   overflow: auto;
 }
 
-div#shop_photo {
+div#entity_photo {
   float: right;
   padding-right: 1em;
   margin-top: -3em;
 }
 
-div#shop_info {
+div#entity_info {
   float: left;
 }
 
-div.shop_info_with_photo {
+div.entity_info_with_photo {
   max-width: 45%;
 }
 
-div#shop_info table {
+div#entity_info table {
   text-align: left;
   font-family: helvetica, arial, sans-serif;
 }
 
-div#shop_info table th, td {
+div#entity_info table th, td {
   padding: 0.5em;
   vertical-align: top;
 }
 
-div#shop_info table th {
+div#entity_info table th {
   white-space: nowrap;
 }
 
-div#shop_info table td ul {
+div#entity_info table td ul {
   margin: 0;
   padding: 0;
   list-style-type: none;
 }
 
-tr.shop_last_updated {
+tr.entity_last_updated {
   font-size: 0.8em;
   font-style: italic;
 }
 
-img.shop_photo {
+img.entity_photo {
   border: thin solid black;
-}
-
-ul.upload_form_type_selection {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
-
-div.upload_error {
-  color: #000000;
-  background-color: #ff0000;
-  border: 0.2em solid black;
-  padding: 1em;
 }

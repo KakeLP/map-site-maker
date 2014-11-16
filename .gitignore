@@ -1,4 +1,5 @@
 blib
+lib/MapSite/CSS.pm
 lib/MapSite/Templates.pm
 Makefile
 MapSite-*.tar.gz

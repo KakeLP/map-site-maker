@@ -3,27 +3,23 @@
 use strict;
 
 use File::Slurp;
+use MapSite::CSS;
 use MapSite::Templates;
 
 # Installs a basic skeleton in an empty directory:
+# assets/main.css
 # conf/mapsite.conf
 # templates/<various_templates>.tt
 
 # Check there aren't any existing files in the way, and make directories.
-if ( scalar glob "conf/*" ) {
-  die "conf directory must initially be empty";
-}
+foreach my $dir ( qw( assets assets/css conf templates ) ) {
+  if ( scalar glob "$dir/*" ) {
+    die "$dir directory must initially be empty";
+  }
 
-if ( scalar glob "templates/*" ) {
-  die "templates directory must initially be empty";
-}
-
-unless ( -e "conf" ) {
-  mkdir "conf" or die "Can't mkdir 'conf': $!";
-}
-
-unless ( -e "templates" ) {
-  mkdir "templates" or die "Can't mkdir 'templates': $!";
+  unless ( -e $dir ) {
+    mkdir $dir or die "Can't mkdir '$dir': $!";
+  }
 }
 
 # Write a basic conf file.
@@ -54,3 +50,15 @@ foreach my $template ( @templates ) {
 
   close $fh or die "Couldn't close templates/$template: $!";
 }
+
+# Write a basic stylesheet.
+my $css = MapSite::CSS->get_css( "basic" )
+  or die "Couldn't get basic stylesheet";
+
+open $fh, ">", "assets/css/main.css"
+  or die "Can't open assets/css/main.css for writing: $!";
+
+print $fh $css;
+close $fh or die "Can't close assets/css/main.css: $!";
+
+
