@@ -1,0 +1,6 @@
+bin/mapsite-generate
+bin/mapsite-init
+lib/MapSite.pm
+lib/MapSite/Entity.pm
+lib/MapSite/Templates.pm
+README

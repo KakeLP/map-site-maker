@@ -5,6 +5,7 @@ use MapSite::Entity;
 use YAML::XS qw( LoadFile );
 
 our $errstr;
+our $VERSION = "0.001";
 
 =head1 NAME
 
