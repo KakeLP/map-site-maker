@@ -227,6 +227,9 @@ sub load_csv {
     s/^url$/website/;
   }
 
+  # Make a hash for easy access to see what fields we have.
+  my %fieldhash = map { $_ => 1 } @fields;
+
   # Now read in the data.
   require Text::CSV::Simple;
   my $parser = Text::CSV::Simple->new({ binary => 1 });
@@ -234,8 +237,8 @@ sub load_csv {
   my @data = $parser->read_file( $filename );
   @data = @data[ 1 .. $#data ]; # strip the headings
 
-  # Make sure everything has an ID.
   foreach my $datum ( @data ) {
+    # Make sure everything has an ID.
     if ( !$datum->{id} ) {
       my $id = $datum->{name};
       $id =~ s/\s+/-/g;
@@ -243,6 +246,12 @@ sub load_csv {
       $id =~ s/[^-a-z0-9]//g;
       $id =~ s/-+/-/g;
       $datum->{id} = $id;
+    }
+
+    # If we don't have an "open" field, add one so the templates don't think
+    # everything has closed down.
+    if ( !$fieldhash{open} ) {
+      $datum->{open} = 1;
     }
   }
 
