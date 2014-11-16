@@ -9,7 +9,6 @@ use File::Copy::Recursive qw( dircopy );
 use File::Path qw( make_path remove_tree );
 use POSIX qw( strftime );
 use Template;
-use YAML::XS qw( Dump LoadFile );
 
 # Read the config files.
 my $conf_file = "conf/mapsite.conf";
@@ -25,7 +24,8 @@ my $flickr_conf = Config::Tiny->read( "conf/flickr_secrets.conf" );
 # Make sure we actually have a datafile, and that we can read it.
 my $datafile = $conf->{_}->{datafile}
   or die "Datafile not specified in $conf_file.\n";
-LoadFile( $datafile ); # This will die for us if there's an error.
+die "Datafile $datafile doesn't exist or is unreadable"
+  unless -r $datafile;
 
 # Make sure we know what type of thing we're modelling.
 my $entity_type = $conf->{_}->{entity_type}
@@ -74,8 +74,8 @@ if ( $flickr_conf ) {
   $flickr_secret = $flickr_conf->{_}->{flickr_secret} || "";
 }
 
-# Parse the YAML.
-my %data = MapSite->parse_yaml(
+# Parse the datafile.
+my %data = MapSite->parse_datafile(
   file          => $datafile,
   check_flickr  => 1,
   flickr_key    => $flickr_key,

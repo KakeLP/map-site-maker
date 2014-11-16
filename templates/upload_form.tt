@@ -10,12 +10,12 @@
   </div>
 [% END %]
 
-<h3>Upload YAML file</h3>
+<h3>Upload data file</h3>
 
 <form method="post" enctype="multipart/form-data"
       action="[% cgi_url %]" onSubmit="return reassure()">
 
-  <p>YAML file: <input type="file" name="datafile" size="80" /></p>
+  <p>Data file: <input type="file" name="datafile" size="80" /></p>
 
   <p><input type="submit" name="Upload" value="Upload" /></p>
 

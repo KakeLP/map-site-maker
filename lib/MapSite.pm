@@ -2,7 +2,6 @@ package MapSite;
 use strict;
 
 use MapSite::Entity;
-use YAML::XS qw( LoadFile );
 
 our $errstr;
 our $VERSION = "0.001";
@@ -13,24 +12,27 @@ MapSite - Makes websites like the London Bookshop Map site.
 
 =head1 DESCRIPTION
 
-A set of tools for turning YAML into a map-enabled website.
+A set of tools for turning CSV or YAML datafiles into a map-enabled website.
 
 =head1 METHODS
 
 =over
 
-=item B<parse_yaml>
+=item B<parse_datafile>
 
   # If you want to check Flickr for photo URLs/heights/widths, you must
   # supply both key and secret.  If one or both is missing then check_flickr
   # will be set to 0.
 
-  my %data = MapSite->parse_yaml(
-                                   file          => "datafile.yaml",
-                                   check_flickr  => 1, # or 0
-                                   flickr_key    => "mykey",
-                                   flickr_secret => "mysecret",
-                                 );
+  my %data = MapSite->parse_datafile(
+                                      file          => "datafile.yaml",
+                                      check_flickr  => 1, # or 0
+                                      flickr_key    => "mykey",
+                                      flickr_secret => "mysecret",
+                                    );
+
+The type of datafile will be determined from the extension - .yaml/.yml
+and .csv are currently supported.
 
 Returns a hash:
 
@@ -44,7 +46,7 @@ Returns a hash:
 
 =cut
 
-sub parse_yaml {
+sub parse_datafile {
   my ( $class, %args )  = @_;
 
   my $filename = $args{file} || die "No datafile supplied";
@@ -55,11 +57,19 @@ sub parse_yaml {
     $check_flickr = 0;
   }
 
-  # Load the YAML and throw away any blank data items (due to trailing
-  # separators etc).
-  my @data = LoadFile( $filename );
+  my @data;
+  if ( $filename =~ /\.ya?ml$/ ) {
+    @data = $class->load_yaml( $filename );
+  } elsif ( $filename =~ /\.csv$/ ) {
+    @data = $class->load_csv( $filename );
+  } else {
+    die "Unknown file type: $filename";
+  }
+
+  # Throw away any blank data items (due to trailing separators etc).
   @data = grep { defined $_ } @data;
 
+  # Sort by name, ignoring case, whitespace, and articles.
   @data = sort { my $an = lc( $a->{name} );
                  my $bn = lc( $b->{name} );
                  foreach ( ( $an, $bn ) ) {
@@ -182,6 +192,61 @@ sub parse_yaml {
            min_long => $min_long,
            max_long => $max_long,
          );
+}
+
+sub load_yaml {
+  my ( $class, $filename ) = @_;
+
+  require YAML::XS;
+  my @data = YAML::XS::LoadFile( $filename );
+
+  return @data;
+}
+
+sub load_csv {
+  my ( $class, $filename ) = @_;
+
+  # Get the field names from the first line of the CSV.
+  open my $fh, "<", $filename
+    or die "Can't open $filename for reading: $!";
+  my $fieldstr = <$fh>;
+  close $fh or die "Can't close $filename: $!";
+
+  my @fields = split /\s*,\s*/, $fieldstr;
+
+  foreach ( @fields ) {
+    # George stuff.
+    s/ \(\?\)//g;
+
+    # Other canonicalisation.
+    $_ = lc( $_ );
+    s/\s+$//;
+    s/\s+/_/g;
+    s/^latitude$/lat/;
+    s/^longitude$/long/;
+    s/^url$/website/;
+  }
+
+  # Now read in the data.
+  require Text::CSV::Simple;
+  my $parser = Text::CSV::Simple->new({ binary => 1 });
+  $parser->field_map( @fields );
+  my @data = $parser->read_file( $filename );
+  @data = @data[ 1 .. $#data ]; # strip the headings
+
+  # Make sure everything has an ID.
+  foreach my $datum ( @data ) {
+    if ( !$datum->{id} ) {
+      my $id = $datum->{name};
+      $id =~ s/\s+/-/g;
+      $id = lc( $id );
+      $id =~ s/[^-a-z0-9]//g;
+      $id =~ s/-+/-/g;
+      $datum->{id} = $id;
+    }
+  }
+
+  return @data;
 }
 
 =back
