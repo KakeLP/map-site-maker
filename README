@@ -1,3 +1,7 @@
+MapSite - A set of tools for turning datafiles into a map-enabled website
+based on static HTML and Javascript.
+
+
 * Put your Flickr key and secret in conf/flickr.conf
 Keep this secret!  Do not share it with anyone!
 

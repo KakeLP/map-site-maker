@@ -1,7 +1,6 @@
 #!/usr/bin/perl -w
 
 use strict;
-use lib "lib";
 
 use MapSite;
 
@@ -19,8 +18,9 @@ my $conf = Config::Tiny->read( $conf_file )
 my $base_url = $conf->{_}->{base_url}
   or die "base_url not specified in $conf_file.\n";
 
-my $flickr_conf = Config::Tiny->read( "conf/flickr_secrets.conf" )
-  or die "Can't read config file: $Config::Tiny::errstr";
+# There may not be a Flickr conf - that's OK, we'll check whether $flickr_conf
+# is true later.
+my $flickr_conf = Config::Tiny->read( "conf/flickr_secrets.conf" );
 
 # Make sure we actually have a datafile, and that we can read it.
 my $datafile = $conf->{_}->{datafile}
@@ -46,9 +46,12 @@ if ( $err ) {
 }
 make_path( "site" );
 make_path( "site/$entity_type" );
+make_path( "site/js" );
 
-# Copy over the static stuff.
-dircopy( "static", "site" ) or die $!;
+# Copy over the static stuff, if there is any.
+if ( -d "static" ) {
+  dircopy( "static", "site" ) or die $!;
+}
 
 # Set up template stuff.
 my $tt_config = {
@@ -64,13 +67,17 @@ my %tt_base_vars = (
 );
 
 # Set up Flickr stuff.
-my $flickr_key    = $flickr_conf->{_}->{flickr_key}    || "";
-my $flickr_secret = $flickr_conf->{_}->{flickr_secret} || "";
+my $flickr_key = "";
+my $flickr_secret = "";
+if ( $flickr_conf ) {
+  $flickr_key    = $flickr_conf->{_}->{flickr_key}    || "";
+  $flickr_secret = $flickr_conf->{_}->{flickr_secret} || "";
+}
 
 # Parse the YAML.
 my %data = MapSite->parse_yaml(
   file          => $datafile,
-  check_flickr  => 0,
+  check_flickr  => 1,
   flickr_key    => $flickr_key,
   flickr_secret => $flickr_secret,
 );
@@ -105,9 +112,11 @@ write_index_page( index_file => $index_file, entities => \@entities,
 write_kml_file( entities => \@entities, kml_file => $kml_file );
 
 # Copy over the assets (CSS, JS).  Some of these are generated.
-dircopy( "assets", "site" ) or die $!;
+if ( -d "assets" ) {
+  dircopy( "assets", "site" ) or die $!;
+}
 my $tt_vars = \%tt_base_vars;
-my $template = "map.js.tt";
+my $template = "map_js.tt";
 open( my $output_fh, ">", "site/js/map.js" ) or die $!;
 $tt->process( $template, $tt_vars, $output_fh ) or die $tt->error;
 close $output_fh;
