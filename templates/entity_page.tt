@@ -84,6 +84,10 @@
         <li><a href="[% entity.thebookguide | html %]">TheBookGuide</a>
         </li>
       [% END %]
+      [% IF entity.wikipedia %]
+        <li><a href="[% entity.wikipedia | html %]">Wikipedia</a>
+        </li>
+      [% END %]
       [% entity.other_links %]
     </ul></td></tr>
   [% END %]

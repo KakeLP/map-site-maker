@@ -7,7 +7,7 @@ use base qw( Class::Accessor );
 MapSite::Entity->mk_accessors( qw(
     id name address lat long description photo photo_copyright photo_license
     new secondhand charity open checked
-    website blog twitter rgl londonist reading_matters thebookguide
+    website blog twitter rgl londonist reading_matters thebookguide wikipedia
 ) );
 
 =head1 NAME
@@ -94,7 +94,7 @@ RGL, Londonist, etc.
 sub has_links {
   my $self = shift;
   foreach my $key ( qw( rgl londonist reading_matters thebookguide tol
-                        other_links ) ) {
+                        wikipedia other_links ) ) {
     if ( $self->{$key} ) {
       return 1;
     }

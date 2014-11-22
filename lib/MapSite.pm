@@ -225,6 +225,8 @@ sub load_csv {
     s/^latitude$/lat/;
     s/^longitude$/long/;
     s/^url$/website/;
+    s/^summary$/description/;
+    s/^wikipedia_url$/wikipedia/;
   }
 
   # Make a hash for easy access to see what fields we have.
