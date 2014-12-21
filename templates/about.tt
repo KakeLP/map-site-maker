@@ -1,0 +1,6 @@
+[% INCLUDE header.tt subtitle="About this site" %]
+
+<p>Website created using <a
+href="https://github.com/KakeLP/map-site-maker">MapSite.pm</a>.
+
+[% INCLUDE footer.tt %]

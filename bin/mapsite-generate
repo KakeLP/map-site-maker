@@ -109,6 +109,9 @@ write_map_page( entities => \@entities, map_file => $map_file,
 write_index_page( index_file => $index_file, entities => \@entities,
                   map_url => $map_url );
 
+write_about_page( about_file => "about.html" );
+write_links_page( links_file => "links.html" );
+
 write_kml_file( entities => \@entities, kml_file => $kml_file );
 
 # Copy over the assets (CSS, JS).  Some of these are generated.
@@ -173,6 +176,36 @@ sub write_index_page {
 
   my $template = "list.tt";
   open( my $output_fh, ">", "site/" . $args{index_file} ) or die $!;
+  binmode $output_fh, ":encoding(UTF-8)";
+  $tt->process( $template, $tt_vars, $output_fh )
+    or die $tt->error;
+}
+
+sub write_about_page {
+  my %args = @_;
+
+  my $tt_vars = {
+    %tt_base_vars,
+    %args,
+  };
+
+  my $template = "about.tt";
+  open( my $output_fh, ">", "site/" . $args{about_file} ) or die $!;
+  binmode $output_fh, ":encoding(UTF-8)";
+  $tt->process( $template, $tt_vars, $output_fh )
+    or die $tt->error;
+}
+
+sub write_links_page {
+  my %args = @_;
+
+  my $tt_vars = {
+    %tt_base_vars,
+    %args,
+  };
+
+  my $template = "links.tt";
+  open( my $output_fh, ">", "site/" . $args{links_file} ) or die $!;
   binmode $output_fh, ":encoding(UTF-8)";
   $tt->process( $template, $tt_vars, $output_fh )
     or die $tt->error;

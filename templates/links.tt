@@ -1,0 +1,8 @@
+[% INCLUDE header.tt subtitle="Useful links" %]
+
+<dl>
+  <dt><a href="https://github.com/KakeLP/map-site-maker">MapSite.pm</a></dt>
+  <dd>The Perl code that generates this website.</dd>
+</dl>
+
+[% INCLUDE footer.tt %]
