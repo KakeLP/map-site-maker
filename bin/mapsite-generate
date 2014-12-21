@@ -46,6 +46,7 @@ if ( $err ) {
 }
 make_path( "site" );
 make_path( "site/$entity_type" );
+make_path( "site/data" );
 make_path( "site/js" );
 
 # Copy over the static stuff, if there is any.
@@ -92,7 +93,6 @@ my $map_url = $base_url . $map_file;
 my $index_file = "list.html";
 my $index_url = $base_url . $index_file;
 my $kml_file = $conf->{_}->{kml_filename} || "$entity_type.kml";
-my $kml_url = $base_url . $kml_file;
 
 foreach my $entity ( @entities ) {
   # At a minimum we need an ID.
@@ -240,9 +240,8 @@ sub write_kml_file {
     points => \@points,
   };
 
-  # NB FIX THE BELOW as existing sites want the KML in data/
   my $template = "kml.tt";
-  open( my $output_fh, ">", "site/" . $args{kml_file} ) or die $!;
+  open( my $output_fh, ">", "site/data/" . $args{kml_file} ) or die $!;
   binmode $output_fh, ":encoding(UTF-8)";
   $tt->process( $template, $tt_vars, $output_fh )
     or die $tt->error;

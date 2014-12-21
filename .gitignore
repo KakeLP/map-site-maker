@@ -2,6 +2,7 @@ blib
 lib/MapSite/CSS.pm
 lib/MapSite/Templates.pm
 Makefile
+Makefile.old
 MapSite-*.tar.gz
 MYMETA.json
 MYMETA.yml
