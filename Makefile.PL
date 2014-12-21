@@ -13,5 +13,9 @@ WriteMakefile(
     # Flickr::API2
     # Text::CSV::Simple
     # YAML::XS
-  }
+  },
+  EXE_FILES => [
+    "bin/mapsite-init",
+    "bin/mapsite-generate"
+  ],
 );
