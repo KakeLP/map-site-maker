@@ -56,7 +56,7 @@ if ( -d "static" ) {
 
 # Set up template stuff.
 my $tt_config = {
-  INCLUDE_PATH => "templates/",
+  INCLUDE_PATH => "custom_templates:templates",
   OUTPUT_PATH => "site/",
 };
 my $tt = Template->new( $tt_config ) or croak Template->error;

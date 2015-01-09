@@ -27,6 +27,12 @@ You probably want to put a full stop at the end.
 site_name = a pretty title for the site, e.g. London Bookshop Map
 
 
+* To amend the templates, create a directory called custom_templates/, copy
+the templates you want to amend from templates/ to custom_templates/, and
+edit the copies in custom_templates/.  (Things in templates/ may get
+overwritten when you upgrade the mapsite maker.)
+
+
 * If you want anything copied over directly to the site, put it in static/
 Note that if you use filenames the same as generated files, the static files
 will be overwritten in site/ with the generated ones.  Similarly, if you
