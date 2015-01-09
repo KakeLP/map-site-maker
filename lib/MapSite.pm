@@ -3,7 +3,6 @@ use strict;
 
 use MapSite::Entity;
 
-our $errstr;
 our $VERSION = "0.001";
 
 =head1 NAME
