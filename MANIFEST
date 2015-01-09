@@ -1,5 +1,6 @@
 bin/mapsite-generate
 bin/mapsite-init
+bin/mapsite-upgrade
 lib/MapSite.pm
 lib/MapSite/CSS.pm
 lib/MapSite/Entity.pm

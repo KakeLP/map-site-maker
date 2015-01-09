@@ -59,6 +59,8 @@ Returns true if all is well.
 
 sub initialise_site {
 
+  my $class = shift;
+
   # Check there aren't any existing files in the way, and make directories.
   foreach my $dir ( qw( assets assets/css conf templates ) ) {
     if ( scalar glob "$dir/*" ) {
@@ -92,28 +94,7 @@ EOF
     return 0;
   }
 
-  # Write out the templates.
-  my @templates = MapSite::Templates->list_templates;
-
-  foreach my $template ( @templates ) {
-    my $content = MapSite::Templates->get_template( $template );
-    unless ( $content ) {
-      $errstr = "Couldn't get template $template";
-      return 0;
-    }
-
-    unless ( open $fh, ">", "templates/$template" ) {
-      $errstr = "Couldn't open templates/$template for writing: $!";
-      return 0;
-    }
-
-    print $fh $content;
-
-    unless ( close $fh ) {
-      $errstr = "Couldn't close templates/$template: $!";
-      return 0;
-    }
-  }
+  $class->_install_templates or return 0;
 
   # Write a basic stylesheet.
   my $css = MapSite::CSS->get_css( "basic" );
@@ -131,6 +112,50 @@ EOF
   unless ( close $fh ) {
     $errstr = "Can't close assets/css/main.css: $!";
     return 0;
+  }
+
+  return 1;
+}
+
+=item B<upgrade_site>
+
+  MapSite::Utils::upgrade_site;
+
+Makes sure that the current directory is running on the latest
+installed version of MapSite.  At the moment, the only thing this does
+(and the only thing it needs to do) is reinstall the things in the
+C<templates/> directory.
+
+=cut
+
+sub upgrade_site {
+  my $class = shift;
+  $class->_install_templates;
+}
+
+sub _install_templates {
+  # Write out the templates.
+  my @templates = MapSite::Templates->list_templates;
+
+  foreach my $template ( @templates ) {
+    my $content = MapSite::Templates->get_template( $template );
+    unless ( $content ) {
+      $errstr = "Couldn't get template $template";
+      return 0;
+    }
+
+    my $fh;
+    unless ( open $fh, ">", "templates/$template" ) {
+      $errstr = "Couldn't open templates/$template for writing: $!";
+      return 0;
+    }
+
+    print $fh $content;
+
+    unless ( close $fh ) {
+      $errstr = "Couldn't close templates/$template: $!";
+      return 0;
+    }
   }
 
   return 1;

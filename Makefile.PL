@@ -16,6 +16,7 @@ WriteMakefile(
   },
   EXE_FILES => [
     "bin/mapsite-init",
-    "bin/mapsite-generate"
+    "bin/mapsite-generate",
+    "bin/mapsite-upgrade",
   ],
 );

@@ -1,0 +1,8 @@
+#!/usr/bin/perl -w
+
+use strict;
+
+use MapSite::Utils;
+
+MapSite::Utils->upgrade_site
+  or die "Error: " . $MapSite::Utils::errstr . "\n"
