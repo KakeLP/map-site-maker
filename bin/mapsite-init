@@ -2,63 +2,6 @@
 
 use strict;
 
-use File::Slurp;
-use MapSite::CSS;
-use MapSite::Templates;
+use MapSite::Utils;
 
-# Installs a basic skeleton in an empty directory:
-# assets/main.css
-# conf/mapsite.conf
-# templates/<various_templates>.tt
-
-# Check there aren't any existing files in the way, and make directories.
-foreach my $dir ( qw( assets assets/css conf templates ) ) {
-  if ( scalar glob "$dir/*" ) {
-    die "$dir directory must initially be empty";
-  }
-
-  unless ( -e $dir ) {
-    mkdir $dir or die "Can't mkdir '$dir': $!";
-  }
-}
-
-# Write a basic conf file.
-open my $fh, ">", "conf/mapsite.conf"
-  or die "Can't open conf/mapsite.conf for writing: $!";
-
-print $fh <<EOF;
-base_url = http://localhost/
-datafile = mapsite.yaml
-entity_type = venues
-site_description = An unconfigured MapSite site.
-site_name = MapSite
-EOF
-
-close $fh or die "Can't close conf/mapsite.conf: $!";
-
-# Write out the templates.
-my @templates = MapSite::Templates->list_templates;
-
-foreach my $template ( @templates ) {
-  my $content = MapSite::Templates->get_template( $template )
-    or die "Couldn't get template $template";
-
-  open my $fh, ">", "templates/$template"
-    or die "Couldn't open templates/$template for writing: $!";
-
-  print $fh $content;
-
-  close $fh or die "Couldn't close templates/$template: $!";
-}
-
-# Write a basic stylesheet.
-my $css = MapSite::CSS->get_css( "basic" )
-  or die "Couldn't get basic stylesheet";
-
-open $fh, ">", "assets/css/main.css"
-  or die "Can't open assets/css/main.css for writing: $!";
-
-print $fh $css;
-close $fh or die "Can't close assets/css/main.css: $!";
-
-
+MapSite::Utils->initialise_site or die $MapSite::Utils::errstr;

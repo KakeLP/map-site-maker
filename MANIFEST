@@ -4,5 +4,6 @@ lib/MapSite.pm
 lib/MapSite/CSS.pm
 lib/MapSite/Entity.pm
 lib/MapSite/Templates.pm
+lib/MapSite/Utils.pm
 Makefile.PL
 README
