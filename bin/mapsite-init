@@ -4,4 +4,5 @@ use strict;
 
 use MapSite::Utils;
 
-MapSite::Utils->initialise_site or die $MapSite::Utils::errstr;
+MapSite::Utils->initialise_site
+  or die "Error: " . $MapSite::Utils::errstr . "\n";
