@@ -5,8 +5,10 @@ use strict;
 use MapSite;
 
 use Config::Tiny;
+use Cwd;
 use File::Copy::Recursive qw( dircopy );
 use File::Path qw( make_path remove_tree );
+use File::Spec;
 use POSIX qw( strftime );
 use Template;
 
@@ -81,6 +83,7 @@ my %data = MapSite->parse_datafile(
   check_flickr  => 1,
   flickr_key    => $flickr_key,
   flickr_secret => $flickr_secret,
+  cache_dir     => File::Spec->catfile( getcwd, "cache" ),
 );
 my @entities = @{ $data{entities} };
 
