@@ -49,7 +49,7 @@ $(
       map.setView( map_centre, 13 );
     }
 
-    map.addLayer( mapquest_layer );
+    map.addLayer( osm_layer );
 
     var layersControl = new L.Control.Layers( {
       "MapQuest": mapquest_layer,
