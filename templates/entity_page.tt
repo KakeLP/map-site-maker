@@ -84,6 +84,26 @@
         <li><a href="[% entity.thebookguide | html %]">TheBookGuide</a>
         </li>
       [% END %]
+      [% IF entity.timeout %]
+        <li><a href="[% entity.timeout | html %]">Time Out</a>
+        </li>
+      [% END %]
+      [% IF entity.goodforlunch %]
+        <li><a href="[% entity.goodforlunch | html %]">Good For Lunch</a>
+        </li>
+      [% END %]
+      [% IF entity.fatgayvegan %]
+        <li><a href="[% entity.fatgayvegan | html %]">Fat Gay Vegan</a>
+        </li>
+      [% END %]
+      [% IF entity.chowhound %]
+        <li><a href="[% entity.chowhound | html %]">Chowhound</a>
+        </li>
+      [% END %]
+      [% IF entity.yelp %]
+        <li><a href="[% entity.yelp | html %]">Yelp</a>
+        </li>
+      [% END %]
       [% IF entity.wikipedia %]
         <li><a href="[% entity.wikipedia | html %]">Wikipedia</a>
         </li>
