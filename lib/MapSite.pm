@@ -230,7 +230,9 @@ sub parse_datafile {
   }
 
   # Write out any cached Flickr data.
-  YAML::XS::DumpFile( $flickr_file, %flickr_cache );
+  if ( $flickr_file ) {
+    YAML::XS::DumpFile( $flickr_file, %flickr_cache );
+  }
 
   return (
            entities => \@entities,

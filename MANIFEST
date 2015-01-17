@@ -8,3 +8,6 @@ lib/MapSite/Templates.pm
 lib/MapSite/Utils.pm
 Makefile.PL
 README
+t/data/501.yaml
+t/001_load.t
+t/501_parse_without_flickr.t

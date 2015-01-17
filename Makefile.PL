@@ -4,6 +4,7 @@ WriteMakefile(
   NAME => "MapSite",
   VERSION_FROM => "lib/MapSite.pm",
   PREREQ_PM => {
+    Class::Accessor => 0,
     Config::Tiny => 0,
     Cwd => 0,
     File::Copy::Recursive => 0,
