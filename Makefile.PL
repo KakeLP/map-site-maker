@@ -13,6 +13,7 @@ WriteMakefile(
     File::Spec => 0,
     Flickr::API2 => 0,
     Template => 0,
+    Template::Plugin::JSON => 0,
     Text::CSV::Simple => 0,
     YAML::XS => 0,
   },
