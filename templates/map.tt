@@ -8,9 +8,7 @@
 
 <div id="entity_list">
 
-  <div id="map_key">
-  <p>green = still in existence, red = closed permanently</p>
-  </div>
+  [% INCLUDE map_key.tt %]
 
   <p>All [% entity_type %]
      (<a href="[% index_url %]">view without a map</a>):</p>
