@@ -22,6 +22,11 @@
     <script type="text/javascript" src="[% base_url %]js/map.js"></script>
   [% END %]
 
+  [% TRY %]
+    [% INCLUDE custom_header_insert.tt %]
+  [% CATCH %]
+  [% END %]
+
 </head>
 
 <body>

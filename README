@@ -33,6 +33,15 @@ edit the copies in custom_templates/.  (Things in templates/ may get
 overwritten when you upgrade the mapsite maker.)
 
 
+* To add extra things to the <head> element of each page, create a template
+called custom_header_insert.tt and put it in custom_templates/ .  This will
+be added to the very end of the <head> on each page.  You might want this
+to define webfonts, for example.
+
+
+* To amend the CSS, edit main.css in assets/css/
+
+
 * If you want anything copied over directly to the site, put it in static/
 Note that if you use filenames the same as generated files, the static files
 will be overwritten in site/ with the generated ones.  Similarly, if you
