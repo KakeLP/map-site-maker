@@ -106,12 +106,12 @@ table.entity_list td.status span {
 }
 
 table.entity_list td.closed span,
-  div.shop_table_key th.closed span {
+  div.entity_table_key th.closed span {
   background-color: #fc6355;
 }
 
 table.entity_list td.open span,
-  div.shop_table_key th.open span {
+  div.entity_table_key th.open span {
   background-color: #00e13c;
 }
 
