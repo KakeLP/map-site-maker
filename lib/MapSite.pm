@@ -178,13 +178,17 @@ sub parse_datafile {
                         "flickr.photos.getExif", { photo_id => $photo_id } );
             my @tags = @{ $exif_data->{photo}{exif} };
             foreach my $tag ( @tags ) {
-              if ( $tag->{label} eq "Date and Time (Original)" ) {
+              if ( $tag->{label} eq "Date and Time (Original)"
+                   || $tag->{label} eq "Date and Time (Modified)" ) {
                 my ( $date, $time ) = split( /\s+/, $tag->{raw}{_content} );
                 my ( $year, $month, $day ) = split( ":", $date );
                 my @months = qw( January February March April May June July
                                  August September October November December );
                 $datum->{photo_date} = $months[$month - 1] . " " . $year;
-                last;
+                # If we've found the Original date, OK.  If we've only found
+                # the Modified date, keep looking for the Original one.  Some
+                # photos only have Modified, so that's the fallback.
+                last if $tag->{label} eq "Date and Time (Original)";
               }
             }
           };
