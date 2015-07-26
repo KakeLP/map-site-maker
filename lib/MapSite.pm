@@ -3,8 +3,14 @@ use strict;
 
 use File::Spec;
 use MapSite::Entity;
+use MapSite::Generate;
 
-our $VERSION = "0.001";
+use base qw( Class::Accessor );
+MapSite->mk_accessors( qw( conf_file ) );
+
+our $errstr;
+
+our $VERSION = "0.002";
 
 =head1 NAME
 
@@ -17,6 +23,35 @@ A set of tools for turning CSV or YAML datafiles into a map-enabled website.
 =head1 METHODS
 
 =over
+
+=item B<new>
+
+  my $mapsite = MapSite->new( conf_file => "conf/mapsite.conf" );
+
+=cut
+
+sub new {
+  my ( $class, %args ) = @_;
+  my $self = \%args;
+  bless $self, $class;
+  return $self;
+}
+
+=item B<generate_site>
+
+  my $mapsite = MapSite->new( conf_file => "conf/mapsite.conf" );
+  MapSite->generate_site
+    or die "Error: " . $MapSite::errstr . "\n";
+
+=cut
+
+sub generate_site {
+  my $self = shift;
+  my $generator = MapSite::Generate->new( conf_file => $self->conf_file);
+  my $ret = $generator->generate_site;
+  $errstr = $MapSite::Generate::errstr unless $ret;
+  return $ret;
+}
 
 =item B<parse_datafile>
 

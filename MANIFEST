@@ -4,6 +4,7 @@ bin/mapsite-upgrade
 lib/MapSite.pm
 lib/MapSite/CSS.pm
 lib/MapSite/Entity.pm
+lib/MapSite/Generate.pm
 lib/MapSite/Templates.pm
 lib/MapSite/Utils.pm
 Makefile.PL

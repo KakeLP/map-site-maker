@@ -7,6 +7,7 @@ WriteMakefile(
     Class::Accessor => 0,
     Config::Tiny => 0,
     Cwd => 0,
+    Data::Dump => 0,
     File::Copy::Recursive => 0,
     File::Path => 0,
     File::Slurp => 0,
