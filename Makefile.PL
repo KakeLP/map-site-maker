@@ -9,7 +9,7 @@ WriteMakefile(
     Cwd => 0,
     Data::Dump => 0,
     File::Copy::Recursive => 0,
-    File::Path => 0,
+    File::Path => 2.08, # recommended in the File::Path docs
     File::Slurp => 0,
     File::Spec => 0,
     Flickr::API2 => 0,

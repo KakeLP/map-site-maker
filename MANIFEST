@@ -1,6 +1,7 @@
 bin/mapsite-generate
 bin/mapsite-init
 bin/mapsite-upgrade
+Changes
 lib/MapSite.pm
 lib/MapSite/CSS.pm
 lib/MapSite/Entity.pm
@@ -10,5 +11,7 @@ lib/MapSite/Utils.pm
 Makefile.PL
 README
 t/data/501.yaml
+t/data/502.yaml
 t/001_load.t
 t/501_parse_without_flickr.t
+t/502_flickr_realname_missing.t

@@ -1,0 +1,4 @@
+0.003   2015-09-12
+      - Add a Changes file.
+      - If photographer hasn't set their realname on Flickr, fall back to
+        their username.

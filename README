@@ -52,3 +52,15 @@ them over like any other file.
 
 * The site will be generated in site/ - every time you run "generate", this
 directory will be created if necessary and cleared out if necessary.
+
+
+* This code has some associated tests.  Some of these tests require a valid
+Flickr key and secret.  If you want to run these tests, set an environment
+variable MAPSITE_FLICKR_CONF pointing to the location of your flickr.conf
+(if this variable isn't set, the tests will just be skipped).  Do note that
+these tests may take a while to run, particularly if the Flickr API is being
+slow.  An attempt is made to detect whether the API is unavailable (if so,
+the tests will be skipped), but this isn't 100% reliable so you may get
+spurious test failures.
+
+

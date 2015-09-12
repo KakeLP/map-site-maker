@@ -10,7 +10,7 @@ MapSite->mk_accessors( qw( conf_file ) );
 
 our $errstr;
 
-our $VERSION = "0.002";
+our $VERSION = "0.003";
 
 =head1 NAME
 
@@ -197,10 +197,12 @@ sub parse_datafile {
               }
             }
 
-            # Get the photographer and license.
+            # Get the photographer and license.  Try to get their real name,
+            # but fall back on their username.
             my $flickr_info = $flickr_api->execute_method(
                        "flickr.photos.getInfo", { photo_id => $photo_id } );
-            my $photo_copyright = $flickr_info->{photo}{owner}{realname};
+            my $photo_copyright = $flickr_info->{photo}{owner}{realname}
+                                  || $flickr_info->{photo}{owner}{username};
             if ( $photo_id eq "14863995906" ) {
               $photo_copyright = "Jim Linwood / Kake";
             }
