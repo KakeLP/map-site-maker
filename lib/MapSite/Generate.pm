@@ -49,7 +49,7 @@ sub new {
   my $m = MapSite::generate->new( conf_file => "conf/mapsite.conf" );
   $m->generate_site;
 
-Generates the site into the C<_site> directory.  If something goes
+Generates the site into the C<site> directory.  If something goes
 wrong, the method sets C<$MapSite::Generate::errstr> and returns
 false.
 

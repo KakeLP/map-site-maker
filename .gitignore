@@ -1,4 +1,5 @@
 blib
+flickr_secrets.conf
 lib/MapSite/CSS.pm
 lib/MapSite/Templates.pm
 Makefile
@@ -7,3 +8,6 @@ MapSite-*.tar.gz
 MYMETA.json
 MYMETA.yml
 pm_to_blib
+site/
+t/cache/
+

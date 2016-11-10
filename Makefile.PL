@@ -18,6 +18,9 @@ WriteMakefile(
     Text::CSV::Simple => 0,
     YAML::XS => 0,
   },
+  TEST_REQUIRES => {
+    Test::HTML::Content => 0,
+  },
   EXE_FILES => [
     "bin/mapsite-init",
     "bin/mapsite-generate",

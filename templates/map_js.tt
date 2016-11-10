@@ -1,5 +1,5 @@
 var min_lat, min_long, max_lat, max_long, centre_lat, centre_long, map;
-var positions = [], markers = [];
+var positions = [], markers = [], closed_markers = [];
 var icons = {};
 
 var gicon_green = L.Icon.extend( {
@@ -24,6 +24,8 @@ var gicon_red = L.Icon.extend( {
 
 icons.open = new gicon_green();
 icons.closed = new gicon_red();
+
+var scope_showing_closed, scope_hiding_closed;
 
 $(
   function() {
@@ -59,9 +61,42 @@ $(
 
     L.control.scale().addTo(map);
 
-    add_markers();
+    add_open_markers();
+    show_closed();
+    scope_showing_closed = $( '#entity_list_scope' ).html();
+    scope_hiding_closed = 'Open';
   }
 );
+
+var show_closed_button = '(<a href="#" id="show_closed">show the closed ones</a>)';
+var hide_closed_button = '(<a href="#" id="hide_closed">hide the closed ones</a>)';
+
+function hide_closed() {
+    closed_markers.forEach( function( marker, index) { map.removeLayer( marker ) } );
+
+    $( '#toggle_closed' ).html( show_closed_button );
+    $( '#entity_list_scope' ).html( scope_hiding_closed );
+    $( 'li.closed' ).hide();
+    $( '#show_closed' ).click(
+                               function() {
+                                   show_closed();
+                                   return false;
+                               }
+                             );
+}
+
+function show_closed() {
+    add_closed_markers();
+    $( '#toggle_closed' ).html( hide_closed_button );
+    $( '#entity_list_scope' ).html( scope_showing_closed );
+    $( 'li.closed' ).show();
+    $( '#hide_closed' ).click(
+                               function() {
+                                   hide_closed();
+                                   return false;
+                               }
+                             );
+}
 
 function add_marker( i, entity ) {
   var content, icon, marker, position;
@@ -92,6 +127,9 @@ function add_marker( i, entity ) {
 
   markers[ i ] = marker;
   positions[ i ] = position;
+  if ( !entity.open ) {
+    closed_markers[ i ] = marker;
+  }
 }
 
 function show_marker( i ) {

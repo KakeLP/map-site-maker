@@ -1,6 +1,7 @@
 package MapSite::Utils;
 use strict;
 
+use File::Path qw( make_path );
 use File::Slurp;
 use MapSite::CSS;
 use MapSite::Templates;
@@ -119,12 +120,17 @@ EOF
 
 =item B<upgrade_site>
 
-  MapSite::Utils::upgrade_site;
+  MapSite::Utils->upgrade_site || die $MapSite::Utils::errstr;
 
 Makes sure that the current directory is running on the latest
 installed version of MapSite.  At the moment, the only thing this does
 (and the only thing it needs to do) is reinstall the things in the
 C<templates/> directory.
+
+If something goes wrong, the method sets C<$MapSite::Utils::errstr>
+and returns false.
+
+Returns true if all is well.
 
 =cut
 
@@ -136,6 +142,8 @@ sub upgrade_site {
 sub _install_templates {
   # Write out the templates.
   my @templates = MapSite::Templates->list_templates;
+
+  make_path( "templates" );
 
   foreach my $template ( @templates ) {
     my $content = MapSite::Templates->get_template( $template );

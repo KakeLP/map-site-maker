@@ -10,7 +10,7 @@ MapSite->mk_accessors( qw( conf_file ) );
 
 our $errstr;
 
-our $VERSION = "0.003";
+our $VERSION = "0.004";
 
 =head1 NAME
 
@@ -40,7 +40,7 @@ sub new {
 =item B<generate_site>
 
   my $mapsite = MapSite->new( conf_file => "conf/mapsite.conf" );
-  MapSite->generate_site
+  $mapsite->generate_site
     or die "Error: " . $MapSite::errstr . "\n";
 
 =cut

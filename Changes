@@ -1,3 +1,7 @@
+0.004   2016-11-10
+      - Add ability to show/hide closed venues on the map with Javascript.
+      - Fix some minor documentation errors.
+
 0.003   2015-09-12
       - Add a Changes file.
       - If photographer hasn't set their realname on Flickr, fall back to

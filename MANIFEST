@@ -10,8 +10,11 @@ lib/MapSite/Templates.pm
 lib/MapSite/Utils.pm
 Makefile.PL
 README
+t/conf/201.conf
+t/data/201.yaml
 t/data/501.yaml
 t/data/502.yaml
 t/001_load.t
+t/201_open_closed.t
 t/501_parse_without_flickr.t
 t/502_flickr_realname_missing.t

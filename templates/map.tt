@@ -10,13 +10,14 @@
 
   [% INCLUDE map_key.tt %]
 
-  <p>All [% entity_type %]
+  <p><span id="entity_list_scope">All</span> [% entity_type %]
+     <span id="toggle_closed"></span>
      (<a href="[% index_url %]">view without a map</a>):</p>
   <ul>
     [% i = 0 %]
     [% FOREACH entity = entities %]
       [% i = i + 1 %]
-      <li>
+      <li class="[% IF entity.open %]open[% ELSE %]closed[% END %]">
         <span>
         [% IF entity.not_on_map %]
           [% CGI.escapeHTML( entity.name ) %] (not on map &#8212;
@@ -42,14 +43,33 @@
   centre_lat = [% centre_lat %];
   centre_long = [% centre_long %];
 
-  function add_markers() {
+  function add_open_markers() {
+    var entity;
+    [% i = 0 %]
+    [% FOREACH entity = entities %]
+      [% i = i + 1 %] [%# Increment even if not adding marker so things don't get out of sync when we add/unadd with Javascript. %]
+      [% IF entity.open %]
+        entity = [% entity.json %];
+        add_marker( [% i %], entity );
+      [% END %]
+    [% END %]
+  }
+
+  function add_closed_markers() {
     var entity;
     [% i = 0 %]
     [% FOREACH entity = entities %]
       [% i = i + 1 %]
-      entity = [% entity.json %];
-      add_marker( [% i %], entity );
+      [% IF !entity.open %]
+        entity = [% entity.json %];
+        add_marker( [% i %], entity );
+      [% END %]
     [% END %]
+  }
+
+  function add_markers() {
+    add_open_markers();
+    add_closed_markers();
   }
 </script>
 
