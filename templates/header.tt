@@ -13,7 +13,7 @@
   <![endif]-->
 
   <script type="text/javascript" 
-      src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"> 
+      src="https://code.jquery.com/jquery-3.1.1.min.js">
   </script>
   <script type="text/javascript" src="[% base_url %]js/main.js"></script>
 

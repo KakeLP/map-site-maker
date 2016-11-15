@@ -1,3 +1,7 @@
+0.005   2016-11-15
+      - Switch to code.jquery.com CDN since Ghostery has started blocking
+        https://ajax.googleapis.com/ajax/libs/jquery/
+
 0.004   2016-11-10
       - Add ability to show/hide closed venues on the map with Javascript.
       - Fix some minor documentation errors.
