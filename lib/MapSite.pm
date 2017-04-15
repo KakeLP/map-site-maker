@@ -10,7 +10,7 @@ MapSite->mk_accessors( qw( conf_file ) );
 
 our $errstr;
 
-our $VERSION = "0.005";
+our $VERSION = "0.006";
 
 =head1 NAME
 
@@ -58,8 +58,12 @@ sub generate_site {
   # If you want to check Flickr for photo URLs/heights/widths, you must
   # supply both key and secret.  If one or both is missing then check_flickr
   # will be set to 0.
+  #
+  # If you have fields in your data for external links, you must supply a
+  # conf file, or those fields will be silently ignored.
 
   my %data = MapSite->parse_datafile(
+                                      conf_file     => "mapsite.conf",
                                       file          => "datafile.yaml",
                                       check_flickr  => 1, # or 0
                                       flickr_key    => "mykey",
@@ -87,6 +91,7 @@ The C<cache_dir> is used for e.g. caching Flickr photo information (as YAML).
 sub parse_datafile {
   my ( $class, %args )  = @_;
 
+  my $conf_file = $args{conf_file} || "";
   my $filename = $args{file} || die "No datafile supplied";
   my $check_flickr = $args{check_flickr} || 0;
   my $flickr_key = $args{flickr_key};
@@ -122,6 +127,16 @@ sub parse_datafile {
   my @entities;
   my ( $min_lat, $max_lat, $min_long, $max_long );
 
+  # If we have a config file, check it for external site definitions.
+  my %external_sites;
+  if ( $conf_file ) {
+    my $conf = Config::Tiny->read( $conf_file )
+      or die "Can't read config file $conf_file: " . "$Config::Tiny::errstr";
+    if ( $conf->{links} ) {
+      %external_sites = %{ $conf->{links} };
+    }
+  }
+
   # If we're checking Flickr for photo info, get the licences info and
   # load in any data we already have cached.
   my ( $flickr_api, %licenses, $flickr_file, %flickr_cache );
@@ -154,6 +169,15 @@ sub parse_datafile {
       $datum->{open} = 1;
     } else {
       $datum->{open} = 0;
+    }
+
+    # Separate out any external links.
+    $datum->{links} = {};
+    foreach my $nickname ( keys %external_sites ) {
+      if ( $datum->{$nickname} ) {
+        my $fullname = $external_sites{$nickname};
+        $datum->{links}{$fullname} = delete $datum->{$nickname};
+      }
     }
 
     if ( $check_flickr && $datum->{photo} ) {

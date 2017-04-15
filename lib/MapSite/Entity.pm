@@ -6,9 +6,7 @@ use Flickr::API2;
 use base qw( Class::Accessor );
 MapSite::Entity->mk_accessors( qw(
     id name address lat long description photo photo_copyright photo_license
-    new secondhand charity open checked
-    website blog twitter rgl londonist reading_matters thebookguide wikipedia
-    goodforlunch fatgayvegan yelp chowhound timeout
+    new secondhand charity open checked website blog twitter links
 ) );
 
 =head1 NAME
@@ -34,7 +32,7 @@ Object modelling a single entity to be plotted on the map.
     lat => 51.00000,
     long => 0.10000,
     website => "http://example.com/bookshop/",
-    rgl => "http://london.randomness.org.uk/wiki.cgi?A_Book_Entity",
+    links => { whatpub => "https://whatpub.com/pubs/CRO/11539/" },
     description => "This shop is an imaginary one, and it has now closed.",
     photo => "http://www.flickr.com/photos/kake_pugh/1234567890/",
     photo_url => "http://farm7.static.flickr.com/123456.jpg",
@@ -94,14 +92,9 @@ RGL, Londonist, etc.
 
 sub has_links {
   my $self = shift;
-  foreach my $key ( qw( rgl londonist reading_matters thebookguide tol
-                        goodforlunch fatgayvegan yelp chowhound timeout
-                        wikipedia other_links ) ) {
-    if ( $self->{$key} ) {
-      return 1;
-    }
+  if ( scalar keys %{$self->{links}} ) {
+    return 1;
   }
-  return 0;
 }
 
 =item B<Other accessors>

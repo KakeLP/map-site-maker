@@ -67,48 +67,9 @@
   [% IF entity.has_links %]
     <tr class="entity_links"><th>Links:</th>
     <td><ul>
-      [% IF entity.rgl %]
-        <li><a href="[% entity.rgl | html %]">Randomness Guide to London</a></li>
+      [% FOREACH link IN entity.links.pairs %]
+        <li><a href="[% link.value | html %]">[% link.key | html %]</a></li>
       [% END %]
-      [% IF entity.tol %]
-        <li><a href="[% entity.tol | html %]">Tired of London, Tired of Life</a></li>
-      [% END %]
-      [% IF entity.londonist %]
-        <li><a href="[% entity.londonist | html %]">Londonist</a></li>
-      [% END %]
-      [% IF entity.reading_matters %]
-        <li><a href="[% entity.reading_matters | html %]">Reading Matters</a>
-        </li>
-      [% END %]
-      [% IF entity.thebookguide %]
-        <li><a href="[% entity.thebookguide | html %]">TheBookGuide</a>
-        </li>
-      [% END %]
-      [% IF entity.timeout %]
-        <li><a href="[% entity.timeout | html %]">Time Out</a>
-        </li>
-      [% END %]
-      [% IF entity.goodforlunch %]
-        <li><a href="[% entity.goodforlunch | html %]">Good For Lunch</a>
-        </li>
-      [% END %]
-      [% IF entity.fatgayvegan %]
-        <li><a href="[% entity.fatgayvegan | html %]">Fat Gay Vegan</a>
-        </li>
-      [% END %]
-      [% IF entity.chowhound %]
-        <li><a href="[% entity.chowhound | html %]">Chowhound</a>
-        </li>
-      [% END %]
-      [% IF entity.yelp %]
-        <li><a href="[% entity.yelp | html %]">Yelp</a>
-        </li>
-      [% END %]
-      [% IF entity.wikipedia %]
-        <li><a href="[% entity.wikipedia | html %]">Wikipedia</a>
-        </li>
-      [% END %]
-      [% entity.other_links %]
     </ul></td></tr>
   [% END %]
   [% IF entity.description %]

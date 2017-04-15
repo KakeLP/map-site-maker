@@ -5,7 +5,11 @@ use MapSite::Utils;
 use Test::HTML::Content;
 use Test::More tests => 5;
 
-my $mapsite = MapSite->new( conf_file => "t/conf/201.conf" );
+# Run in the t/ directory because otherwise our template extraction below
+# may overwrite files that are being worked on.
+chdir "t";
+
+my $mapsite = MapSite->new( conf_file => "conf/201.conf" );
 
 # Extract the templates.
 MapSite::Utils->upgrade_site || die $MapSite::Utils::errstr;

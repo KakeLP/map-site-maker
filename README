@@ -6,7 +6,7 @@ based on static HTML and Javascript.
 Keep this secret!  Do not share it with anyone!
 
 
-* Put other variables in conf/mapsite.conf:
+* Put other variables in conf/mapsite.conf.  In the root section:
 
 base_url = the root URL of the site, e.g. http://londonbookshops.org/
 
@@ -26,6 +26,20 @@ You probably want to put a full stop at the end.
 
 site_name = a pretty title for the site, e.g. London Bookshop Map
 
+You can also have a section called [links] which maps datafile keys
+to names of websites, e.g.
+diamondgeezer = diamond geezer article
+readingmatters = Reading Matters review
+whatpub = WhatPub entry
+yelp = Yelp comments
+
+Then in your datafile you'll have e.g.
+diamondgeezer: http://diamondgeezer.blogspot.co.uk/2013/04/woolfson-tay.html
+
+which will be transformed into
+<a href="http://diamondgeezer.blogspot.co.uk/2013/04/woolfson-tay.html">diamond
+geezer article</a>
+in the site HTML.
 
 * To amend the templates, create a directory called custom_templates/, copy
 the templates you want to amend from templates/ to custom_templates/, and

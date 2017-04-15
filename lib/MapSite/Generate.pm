@@ -132,6 +132,7 @@ sub generate_site {
 
   # Parse the datafile.
   my %data = MapSite->parse_datafile(
+    conf_file     => $conf_file,
     file          => $datafile,
     check_flickr  => 1,
     flickr_key    => $flickr_key,

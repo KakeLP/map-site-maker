@@ -1,3 +1,6 @@
+0.006   2017-04-15
+      - Add ability to define your own sites for the external links section.
+
 0.005   2016-11-15
       - Switch to code.jquery.com CDN since Ghostery has started blocking
         https://ajax.googleapis.com/ajax/libs/jquery/
