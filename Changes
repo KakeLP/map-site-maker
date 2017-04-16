@@ -1,3 +1,6 @@
+0.007   2017-04-16
+      - Upgrade Leaflet version to 1.0.3.
+
 0.006   2017-04-15
       - Add ability to define your own sites for the external links section.
 

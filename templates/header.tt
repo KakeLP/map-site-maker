@@ -6,11 +6,10 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="description" content="[% site_description %][% IF updated %]  Last updated at [% updated | html %].[% END %]" />
 
+  [% SET leaflet_version='1.0.3' %]
+
   <link rel="stylesheet" href="[% base_url %]css/main.css" type="text/css" />
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.css" />
-  <!--[if lte IE 8]>
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.ie.css" />
-  <![endif]-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@[% leaflet_version %]/dist/leaflet.css">
 
   <script type="text/javascript" 
       src="https://code.jquery.com/jquery-3.1.1.min.js">
@@ -18,7 +17,7 @@
   <script type="text/javascript" src="[% base_url %]js/main.js"></script>
 
   [% IF do_map %]
-    <script src="http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet@[% leaflet_version %]/dist/leaflet.js"></script>
     <script type="text/javascript" src="[% base_url %]js/map.js"></script>
   [% END %]
 
