@@ -8,7 +8,7 @@ var gicon_green = L.Icon.extend( {
       shadowUrl: null,
       iconSize: new L.Point( 32, 32 ),
       iconAnchor: new L.Point( 15, 32 ),
-      popupAnchor: new L.Point( 0, -40 )
+      popupAnchor: new L.Point( 0, -30 )
     }
 } );
 
@@ -18,7 +18,7 @@ var gicon_red = L.Icon.extend( {
       shadowUrl: null,
       iconSize: new L.Point( 32, 32 ),
       iconAnchor: new L.Point( 15, 32 ),
-      popupAnchor: new L.Point( 0, -40 )
+      popupAnchor: new L.Point( 0, -30 )
     }
 } );
 
@@ -133,8 +133,15 @@ function add_marker( i, entity ) {
 }
 
 function show_marker( i ) {
+  var top_of_map, padding;
   markers[ i ].openPopup();
   map.panTo( positions[ i ] );
+  /* Also scroll the page back up if the top of the popup bubble is off the top
+     of the viewport. */
+  if ( $( '.leaflet-popup' ).offset().top < $( window ).scrollTop() ) {
+    top_of_map = $( '#map_canvas' ).offset().top;
+    padding = parseFloat($( 'body' ).css( 'font-size' ) ) * 0.5;
+    $( 'html, body' ).animate( { scrollTop: top_of_map - padding }, 'slow' );
+  }
   return false;
 }
-
