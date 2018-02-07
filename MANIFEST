@@ -9,6 +9,7 @@ lib/MapSite/Generate.pm
 lib/MapSite/Templates.pm
 lib/MapSite/Utils.pm
 Makefile.PL
+MANIFEST
 README
 t/conf/201.conf
 t/conf/251.conf
