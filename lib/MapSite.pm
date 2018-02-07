@@ -10,7 +10,7 @@ MapSite->mk_accessors( qw( conf_file ) );
 
 our $errstr;
 
-our $VERSION = "0.007";
+our $VERSION = "0.008";
 
 =head1 NAME
 
@@ -117,8 +117,8 @@ sub parse_datafile {
   @data = sort { my $an = lc( $a->{name} );
                  my $bn = lc( $b->{name} );
                  foreach ( ( $an, $bn ) ) {
-                   s/and//g;
-                   s/the//g;
+                   s/\band\b//g;
+                   s/\bthe\b//g;
                    s/\s//g;
                  }
                  $an cmp $bn;

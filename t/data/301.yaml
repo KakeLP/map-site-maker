@@ -1,0 +1,80 @@
+id: andu-cafe-dalston
+name: Andu Cafe
+address: 528 Kingsland Road, Dalston, E8 4AH
+phone: 020 7254 1780
+photo: https://www.flickr.com/photos/kake_pugh/28293591943/
+description: Vegan Ethiopian cafe.
+rgl: http://london.randomness.org.uk/wiki.cgi?Andu_Cafe,_E8_4AH
+lat: 51.544494
+long: -0.075825647
+open: yes
+checked: August 2016
+---
+id: beatroot-soho
+name: Beatroot
+address: 92 Berwick Street, Soho, W1F 0QD
+rgl: http://london.randomness.org.uk/wiki.cgi?Beatroot,_W1F_0QD
+description: <a href="http://now-here-this.timeout.com/2015/04/16/veggie-cafe-beatroot-in-soho-is-closing-down/">Closed for good</a> in April 2015.
+long: -0.134518
+lat: 51.512936
+open: no
+---
+id: the-fields-beneath-kentish-town
+name: The Fields Beneath
+address: 52A Prince of Wales Road, Kentish Town, NW5 3LN
+twitter: FieldsBeneath
+phone: 020 7424 8838
+description: Vegan cafe and coffee shop at Kentish Town West Station.
+fatgayvegan: http://fatgayvegan.com/2017/01/26/non-vegan-cafe-switching-to-vegan/
+kentishtowner: http://www.kentishtowner.co.uk/2017/03/29/fields-beneath-gone-vegan/
+lat: 51.546530
+long: -0.14665702
+open: yes
+---
+id: food-for-thought-covent-garden
+name: Food For Thought
+address: 31 Neal Street, Covent Garden, WC2H 9PR
+photo: http://www.flickr.com/photos/kake_pugh/3134767665/
+rgl: http://london.randomness.org.uk/wiki.cgi?Food_For_Thought,_WC2H_9PR
+description: Vegetarian cafe of several decades' standing, <a href="http://foodforthought-london.co.uk/news.html">closed down for good</a> in June 2015.
+long: -0.125678
+lat: 51.514138
+open: no
+---
+id: love-and-scandal-waterloo
+name: Love And Scandal
+address: 107 Lower Marsh, Waterloo, SE1 7AB
+website: http://www.loveandscandal.co.uk/
+twitter: ScandalCoffee
+description: <a href="http://fatgayvegan.com/2016/09/10/cafe-in-london-turns-vegan/">Became 100% vegan</a> in September 2016.
+lat: 51.501091
+long: -0.11239623
+open: yes
+---
+id: love-gift-vegan-honor-oak-park
+name: Love Gift Vegan Cafe
+address: 108 Brockley Rise, Honor Oak Park, SE23 1NH
+flickingthevs: http://flickingthevs.blogspot.co.uk/2015/08/lovegift-and-cookdaily-two-excellent.html
+happycow: http://www.happycow.net/reviews/lovegift-vegan-cafe-south-east-london-57965
+lat: 51.448738
+long: -0.039800495
+open: yes
+---
+id: only-parathas-queensbury
+name: Only Parathas
+address: 238-240 Streatfield Road, Queensbury, HA3 9BX
+rgl: http://london.randomness.org.uk/wiki.cgi?Only_Parathas,_HA3_9BX
+long: -0.29706
+lat: 51.595562
+open: yes
+checked: April 2009
+---
+id: thenga-cafe-bloomsbury
+name: Thenga Cafe
+address: 120 Cromer Street (entrance on Judd Street), Bloomsbury, WC1H 8BS
+twitter: ThengaCafe
+description: Vegan and vegetarian "spice-inspired" cafe.
+fatgayvegan: http://fatgayvegan.com/2017/06/16/vegan-options-in-heart-of-bloomsbury/
+lat: 51.527519
+long: -0.12448052
+open: yes

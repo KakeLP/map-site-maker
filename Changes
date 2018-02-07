@@ -1,3 +1,6 @@
+0.008   2017-07-05
+      - Fix bug with sorting of names starting with "And" and "The".
+
 0.007   2017-04-16
       - Upgrade Leaflet version to 1.0.3.
 
