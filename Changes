@@ -1,3 +1,7 @@
+0.010   2018-02-08
+      - Remove Mapquest layer since the open version of the tiles stopped
+        working in mid-2016!
+
 0.009   2018-02-07
       - Make the default stylesheet, templates, and JS responsive.
       - Upgrade Leaflet version to 1.3.1.

@@ -33,15 +33,10 @@ $(
     var map_centre = new L.LatLng( centre_lat, centre_long );
     map = new L.Map( 'map_canvas', { center: map_centre } );
 
-    var mapquest_layer;
-    var mq_url = 'http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png';
-    var subdomains = [ 'otile1', 'otile2', 'otile3', 'otile4' ];
-    var attrib = 'Data, imagery and map information provided by <a href="http://open.mapquest.co.uk" target="_blank">MapQuest</a>, <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a>';
+    var osm_url = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    var osm_attrib = '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>';
 
-    mapquest_layer = new L.TileLayer( mq_url, { maxZoom: 18, attribution: attrib, subdomains: subdomains } );
-
-    var osm_layer = new L.TileLayer(
-        'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' );
+    var osm_layer = new L.TileLayer( osm_url, { attribution: osm_attrib } );
 
     if ( min_lat && ( min_lat != max_lat ) ) {
       var bounds = new L.LatLngBounds( new L.LatLng( min_lat, min_long ),
@@ -52,13 +47,6 @@ $(
     }
 
     map.addLayer( osm_layer );
-
-    var layersControl = new L.Control.Layers( {
-      "MapQuest": mapquest_layer,
-      "OpenStreetMap": osm_layer,
-    } );
-    map.addControl( layersControl );
-
     L.control.scale().addTo(map);
 
     add_open_markers();
