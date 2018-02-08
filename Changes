@@ -1,3 +1,6 @@
+0.011   
+      - Remove unused call to main.js
+
 0.010   2018-02-08
       - Remove Mapquest layer since the open version of the tiles stopped
         working in mid-2016!
