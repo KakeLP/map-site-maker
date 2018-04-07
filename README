@@ -26,6 +26,9 @@ You probably want to put a full stop at the end.
 
 site_name = a pretty title for the site, e.g. London Bookshop Map
 
+sort_by_id = set this to 1 to sort by ID instead of name when listing your
+shops/pubs/whatever
+
 You can also have a section called [links] which maps datafile keys
 to names of websites, e.g.
 diamondgeezer = diamond geezer article

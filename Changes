@@ -1,5 +1,6 @@
-0.011   
+0.011   2018-04-07
       - Remove unused call to main.js
+      - Add option to sort by ID instead of name
 
 0.010   2018-02-08
       - Remove Mapquest layer since the open version of the tiles stopped

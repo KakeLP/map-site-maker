@@ -10,7 +10,7 @@ MapSite->mk_accessors( qw( conf_file ) );
 
 our $errstr;
 
-our $VERSION = "0.010";
+our $VERSION = "0.011";
 
 =head1 NAME
 
@@ -113,9 +113,17 @@ sub parse_datafile {
   # Throw away any blank data items (due to trailing separators etc).
   @data = grep { defined $_ } @data;
 
-  # Sort by name, ignoring case, whitespace, and articles.
-  @data = sort { my $an = lc( $a->{name} );
-                 my $bn = lc( $b->{name} );
+  # Sort by name or ID, ignoring case, whitespace, and articles.
+  my $sortkey = "name";
+  if ( $conf_file ) {
+    my $conf = Config::Tiny->read( $conf_file )
+	or die "Can't read config file $conf_file: " . "$Config::Tiny::errstr";
+    if ( $conf->{_}{sort_by_id} ) {
+      $sortkey = "id";
+    }
+  }
+  @data = sort { my $an = lc( $a->{$sortkey} );
+                 my $bn = lc( $b->{$sortkey} );
                  foreach ( ( $an, $bn ) ) {
                    s/\band\b//g;
                    s/\bthe\b//g;
