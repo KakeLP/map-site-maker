@@ -141,8 +141,8 @@ sub generate_site {
   );
   my @entities = @{ $data{entities} };
 
-  my ( $min_lat, $max_lat, $min_long, $max_long )
-    = @data{ qw( min_lat max_lat min_long max_long ) };
+  my ( $min_lat, $max_lat, $min_long, $max_long, $categories )
+    = @data{ qw( min_lat max_lat min_long max_long categories ) };
 
   # Generate the pages that need generating.
   my $map_file = "map.html";
@@ -162,10 +162,11 @@ sub generate_site {
   $self->write_map_page( entities => \@entities, map_file => $map_file,
     index_url => $index_url,
     min_lat => $min_lat, max_lat => $max_lat,
-    min_long => $min_long, max_long => $max_long );
+    min_long => $min_long, max_long => $max_long,
+    categories => $categories );
 
   $self->write_index_page( index_file => $index_file, entities => \@entities,
-                            map_url => $map_url );
+                            categories => $categories, map_url => $map_url );
 
   $self->write_about_page( about_file => "about.html" );
   $self->write_links_page( links_file => "links.html" );
@@ -219,6 +220,7 @@ sub write_map_page {
     %args,
     centre_lat => ( ( $args{max_lat} + $args{min_lat} ) / 2 ),
     centre_long => ( ( $args{max_long} + $args{min_long} ) / 2 ),
+    categories => $args{categories},
     updated => $self->get_time(),
   };
 
@@ -236,6 +238,7 @@ sub write_index_page {
   my $tt_vars = {
     %{ $self->tt_base_vars },
     %args,
+    categories => $args{categories},
     updated => $self->get_time(),
   };
 
@@ -297,7 +300,7 @@ sub write_kml_file {
                  address => $entity->address,
                  url => "$base_url$entity_type/" . $entity->id . ".html",
                );
-    if ( $entity->open ne "yes" ) {
+    if ( !$entity->open || $entity->open ne "yes" ) {
       $data{style} = "red";
     } else {
       $data{style} = "green";

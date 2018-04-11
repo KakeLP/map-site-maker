@@ -1,0 +1,5 @@
+<ul class="category_list">
+  [% FOREACH category = categories %]
+    <li id="cat_[% category.id %]" class="cat_colour_[% category.colour %]">[% category.name %] <span id="toggle_cat_[% category.id %]"></span></li>
+  [% END %]
+</ul>

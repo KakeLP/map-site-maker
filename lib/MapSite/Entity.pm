@@ -6,7 +6,7 @@ use Flickr::API2;
 use base qw( Class::Accessor );
 MapSite::Entity->mk_accessors( qw(
     id name address lat long description photo photo_copyright photo_license
-    new secondhand charity open checked website blog twitter links
+    new secondhand charity open checked website blog twitter links category
 ) );
 
 =head1 NAME
@@ -117,6 +117,7 @@ sub TO_JSON {
     not_on_map => $self->not_on_map,
     address => $self->address,
     open => $self->open,
+    category => $self->category,
   };
 }
 

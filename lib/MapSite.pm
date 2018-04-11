@@ -10,7 +10,7 @@ MapSite->mk_accessors( qw( conf_file ) );
 
 our $errstr;
 
-our $VERSION = "0.011";
+our $VERSION = "0.012";
 
 =head1 NAME
 
@@ -82,6 +82,8 @@ Returns a hash:
 
 =item min_lat, max_lat, min_long, max_long - scalars
 
+=item categories - ref to an array of strings
+
 =back
 
 The C<cache_dir> is used for e.g. caching Flickr photo information (as YAML).
@@ -101,6 +103,12 @@ sub parse_datafile {
   }
   my $cache_dir = $args{cache_dir} || "";
 
+  my $conf;
+  if ( $conf_file ) {
+    $conf = Config::Tiny->read( $conf_file )
+	or die "Can't read config file $conf_file: " . "$Config::Tiny::errstr";
+  }
+
   my @data;
   if ( $filename =~ /\.ya?ml$/ ) {
     @data = $class->load_yaml( $filename );
@@ -113,15 +121,20 @@ sub parse_datafile {
   # Throw away any blank data items (due to trailing separators etc).
   @data = grep { defined $_ } @data;
 
-  # Sort by name or ID, ignoring case, whitespace, and articles.
+  # Find out our sortkey (name or ID) and default category.
   my $sortkey = "name";
-  if ( $conf_file ) {
-    my $conf = Config::Tiny->read( $conf_file )
-	or die "Can't read config file $conf_file: " . "$Config::Tiny::errstr";
-    if ( $conf->{_}{sort_by_id} ) {
-      $sortkey = "id";
-    }
+  my $default_category = "open";
+  if ( $conf && $conf->{_}{sort_by_id} ) {
+    $sortkey = "id";
   }
+  if ( $conf && $conf->{_}{default_category} ) {
+    $default_category = $conf->{_}{default_category};
+  }
+
+  # Don't add in the default category yet - we might not need it!
+  my %categories = ();
+
+  # Sort ignoring case, whitespace, and articles.
   @data = sort { my $an = lc( $a->{$sortkey} );
                  my $bn = lc( $b->{$sortkey} );
                  foreach ( ( $an, $bn ) ) {
@@ -137,12 +150,8 @@ sub parse_datafile {
 
   # If we have a config file, check it for external site definitions.
   my %external_sites;
-  if ( $conf_file ) {
-    my $conf = Config::Tiny->read( $conf_file )
-      or die "Can't read config file $conf_file: " . "$Config::Tiny::errstr";
-    if ( $conf->{links} ) {
-      %external_sites = %{ $conf->{links} };
-    }
+  if ( $conf && $conf->{links} ) {
+    %external_sites = %{ $conf->{links} };
   }
 
   # If we're checking Flickr for photo info, get the licences info and
@@ -172,12 +181,21 @@ sub parse_datafile {
     if ( !$datum->{name} ) {
       next;
     }
-    my $open = $datum->{open} || "";
-    if ( $open eq "yes" || $open eq "1" ) {
-      $datum->{open} = 1;
-    } else {
-      $datum->{open} = 0;
+
+    # If we don't have a category specified, check for legacy "open" attribute
+    if ( !$datum->{category} ) {
+      my $open = $datum->{open} || "";
+      if ( $open eq "yes" || $open eq "1" ) {
+        $datum->{open} = 1;
+        $datum->{category} = "open";
+      } elsif ( $open eq "no" ) {
+        $datum->{open} = 0;
+        $datum->{category} = "closed"
+      } else {
+        $datum->{category} = $default_category;
+      }
     }
+    $categories{$datum->{category}} = 1;
 
     # Separate out any external links.
     $datum->{links} = {};
@@ -307,12 +325,28 @@ sub parse_datafile {
     YAML::XS::DumpFile( $flickr_file, %flickr_cache );
   }
 
+  # Package the categories.
+  my ( %catnames, %catcolours );
+  if ( $conf && $conf->{categories} ) {
+    %catnames = %{ $conf->{categories} };
+  }
+  if ( $conf && $conf->{category_colours} ) {
+    %catcolours = %{ $conf->{category_colours} };
+  }
+
+  my @cats = map {
+                   my $name = $catnames{$_} || $_;
+                   my $colour = $catcolours{$_} || "green";
+                   { id => $_, name => $name, colour => $colour }
+                 } sort keys %categories;
+
   return (
            entities => \@entities,
            min_lat => $min_lat,
            max_lat => $max_lat,
            min_long => $min_long,
            max_long => $max_long,
+           categories => \@cats,
          );
 }
 

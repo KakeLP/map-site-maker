@@ -85,40 +85,16 @@ div#front_page_text {
   padding-top: 0.5em;
 }
 
-div.entity_table_key th.status span {
-  font-size: 0.8em;
-  font-weight: bold;
-  border: thin solid black;
-  width: 1.5em;
-  text-align: center;
-  display: block;
-}
-
 table.entity_list th {
   text-align: left;
   padding-left: 0.5em;
 }
 
-table.entity_list td.status {
-  font-size: 0.8em;
-  font-weight: bold;
-}
-
-table.entity_list td.status span {
+table.entity_list td.category, div.entity_table_key td.category {
   border: thin solid black;
-  width: 1.5em;
+  width: 0.4em;
+  height: 0.4em;
   display: block;
-  text-align: center;
-}
-
-table.entity_list td.closed span,
-  div.entity_table_key th.closed span {
-  background-color: #fc6355;
-}
-
-table.entity_list td.open span,
-  div.entity_table_key th.open span {
-  background-color: #00e13c;
 }
 
 div#entity_info table {
@@ -149,6 +125,48 @@ img.entity_photo {
   border: thin solid black;
 }
 
+ul.category_list li {
+  list-style: none;
+  position: relative;
+}
+
+ul.category_list li:before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 0.6em;
+  left: -20px;
+  top: 0.3em;
+  border: thin solid black;
+}
+
+li.cat_colour_blue:before, td.cat_colour_blue {
+  background-color: #5781fc;
+}
+li.cat_colour_green:before, td.cat_colour_green {
+  background-color: #00e13c;
+}
+li.cat_colour_ltblue:before, td.cat_colour_ltblue {
+  background-color: #55d7d7;
+}
+li.cat_colour_orange:before, td.cat_colour_orange {
+  background-color: #ff9900;
+}
+li.cat_colour_pink:before, td.cat_colour_pink {
+  background-color: #e14f9e;
+}
+li.cat_colour_purple:before, td.cat_colour_purple {
+  background-color: #7e55fc;
+}
+li.cat_colour_red:before, td.cat_colour_red {
+  background-color: #fc6355;
+}
+li.cat_colour_yellow:before, td.cat_colour_yellow {
+  background-color: #fcf357;
+}
+
 @media (min-width: 1000px) {
   div#map_canvas {
     float: right;
@@ -157,6 +175,10 @@ img.entity_photo {
 
   div#map_key {
     padding-top: 1em;
+  }
+
+  div#category_list {
+    padding-bottom: 1em;
   }
 
   div#entity_list {

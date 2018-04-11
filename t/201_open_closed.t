@@ -3,7 +3,7 @@ use File::Slurp;
 use MapSite;
 use MapSite::Utils;
 use Test::HTML::Content;
-use Test::More tests => 5;
+use Test::More tests => 9;
 
 # Run in the t/ directory because otherwise our template extraction below
 # may overwrite files that are being worked on.
@@ -20,8 +20,24 @@ diag "Error is: $@" if $@;
 
 my $html = read_file( "site/map.html" );
 
-tag_ok( $html, "li", { class => "open" }, "we have an <li> for an open venue");
-tag_ok( $html, "li", { class => "closed" }, "...ditto for closed" );
+tag_ok( $html, "li", { class => qr/\bcat_open_item\b/ },
+        "we have an <li> for an open venue");
+tag_ok( $html, "li", { class => qr/\bopen\b/ }, "...and the legacy class" );
+tag_ok( $html, "li", { class => qr/\bcat_closed_item\b/ },
+        "we have an <li> for a closed venue");
+tag_ok( $html, "li", { class => qr/\bclosed\b/ }, "...and the legacy class" );
 
-like( $html, qr/function\s+add_open_markers.*222-veggie-vegan-restaurant-west-brompton.*add_marker.*function\s+add_closed_markers/s, "add_open_markers() picks up an open venue" );
-like( $html, qr/function\s+add_closed_markers.*amico-bio-new-oxford-street/s, "add_closed_markers() picks up a closed venue" );
+like( $html,
+      qr/function\s+create_all_markers.*222-veggie-vegan-restaurant-west-brompton.*function\s+show_all_markers/s,
+      "create_all_markers() picks up an open venue" );
+like( $html,
+      qr/function\s+create_all_markers.*amico-bio-new-oxford-street.*function\s+show_all_markers/s,
+      "...and a closed one" );
+
+like( $html,
+      qr/function\s+show_all_markers.*show_category_markers\([^}]+\"open/s,
+      "show_all_markers() shows open venues" );
+like( $html,
+      qr/function\s+show_all_markers.*show_category_markers\([^}]+\"closed/s,
+      "...and closed ones" );
+

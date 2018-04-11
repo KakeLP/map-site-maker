@@ -1,10 +1,9 @@
 var min_lat, min_long, max_lat, max_long, centre_lat, centre_long, map;
-var positions = [], markers = [], closed_markers = [];
+var positions = [], markers = [], closed_markers = [], categories = [];
 var icons = {};
 
-var gicon_green = L.Icon.extend( {
+var gicon = L.Icon.extend( {
     options: {
-      iconUrl: 'http://maps.google.com/mapfiles/ms/micons/green-dot.png',
       shadowUrl: null,
       iconSize: new L.Point( 32, 32 ),
       iconAnchor: new L.Point( 15, 32 ),
@@ -12,20 +11,12 @@ var gicon_green = L.Icon.extend( {
     }
 } );
 
-var gicon_red = L.Icon.extend( {
-    options: {
-      iconUrl: 'http://maps.google.com/mapfiles/ms/micons/red-dot.png',
-      shadowUrl: null,
-      iconSize: new L.Point( 32, 32 ),
-      iconAnchor: new L.Point( 15, 32 ),
-      popupAnchor: new L.Point( 0, -30 )
-    }
-} );
+function create_icon( colour ) {
+  return new gicon( { iconUrl: 'http://maps.google.com/mapfiles/ms/micons/' + colour + '-dot.png' } );
+}
 
-icons.open = new gicon_green();
-icons.closed = new gicon_red();
-
-var scope_showing_closed, scope_hiding_closed;
+icons.open = create_icon( 'green' );
+icons.closed = create_icon( 'red' );
 
 $(
   function() {
@@ -49,44 +40,52 @@ $(
     map.addLayer( osm_layer );
     L.control.scale().addTo(map);
 
-    add_open_markers();
-    show_closed();
-    scope_showing_closed = $( '#entity_list_scope' ).html();
-    scope_hiding_closed = 'Open';
+    create_all_markers();
+    show_all_markers();
   }
 );
 
-var show_closed_button = '(<a href="#" id="show_closed">show the closed ones</a>)';
-var hide_closed_button = '(<a href="#" id="hide_closed">hide the closed ones</a>)';
-
-function hide_closed() {
-    closed_markers.forEach( function( marker, index) { map.removeLayer( marker ) } );
-
-    $( '#toggle_closed' ).html( show_closed_button );
-    $( '#entity_list_scope' ).html( scope_hiding_closed );
-    $( 'li.closed' ).hide();
-    $( '#show_closed' ).click(
-                               function() {
-                                   show_closed();
-                                   return false;
-                               }
-                             );
+function add_category_markers( cat ) {
+  markers.forEach( function( marker, index ) {
+    if ( categories[index] === cat.id ) {
+      map.addLayer( markers[index] );
+    }
+  } );
 }
 
-function show_closed() {
-    add_closed_markers();
-    $( '#toggle_closed' ).html( hide_closed_button );
-    $( '#entity_list_scope' ).html( scope_showing_closed );
-    $( 'li.closed' ).show();
-    $( '#hide_closed' ).click(
-                               function() {
-                                   hide_closed();
-                                   return false;
-                               }
-                             );
+function remove_category_markers( cat ) {
+  markers.forEach( function( marker, index ) {
+    if ( categories[index] === cat.id ) {
+      map.removeLayer( markers[index] );
+    }
+  } );
 }
 
-function add_marker( i, entity ) {
+function show_category_markers( cat ) {
+  add_category_markers( cat );
+  $( '#toggle_cat_' + cat.id ).html( '<a href="#" id="hide_cat_' + cat.id + '">[hide]</a>' );
+  $( 'li.cat_' + cat.id + '_item').show();
+  $( '#hide_cat_' + cat.id ).click(
+                                    function() {
+                                      hide_category_markers( cat );
+                                      return false;
+                                    }
+                                  );
+}
+
+function hide_category_markers( cat ) {
+  remove_category_markers( cat );
+  $( '#toggle_cat_' + cat.id ).html( '<a href="#" id="show_cat_' + cat.id + '">[show]</a>' );
+  $( 'li.cat_' + cat.id + '_item').hide();
+  $( '#show_cat_' + cat.id ).click(
+                                    function() {
+                                      show_category_markers( cat );
+                                      return false;
+                                    }
+                                  );
+}
+
+function create_marker( i, entity ) {
   var content, icon, marker, position;
 
   if ( entity.not_on_map ) {
@@ -94,19 +93,13 @@ function add_marker( i, entity ) {
   }
 
   position = new L.LatLng( entity.lat, entity.long );
-
-  if ( entity.open ) {
-    icon = icons.open;
-  } else {
-    icon = icons.closed;
-  }
+  icon = icons[ entity.category ];
 
   marker = new L.Marker( position, { icon: icon } );
-  map.addLayer( marker );
 
   content = '<a href="[% base_url %][% entity_type %]/' + entity.id +
             '.html">' + entity.name + '</a>';
-  if ( !entity.open ) {
+  if ( entity.category === 'closed' ) {
     content = content + ' (closed)';
   }
   content = content + '<br>' + entity.address;
@@ -115,12 +108,9 @@ function add_marker( i, entity ) {
 
   markers[ i ] = marker;
   positions[ i ] = position;
-  if ( !entity.open ) {
-    closed_markers[ i ] = marker;
-  }
 }
 
-function show_marker( i ) {
+function show_popup( i ) {
   var top_of_map, padding;
   markers[ i ].openPopup();
   map.panTo( positions[ i ] );

@@ -13,6 +13,9 @@ base_url = the root URL of the site, e.g. http://londonbookshops.org/
 datafile = the location of the datafile, e.g. /home/kake/data/bookshops.yaml
 (note that currently this must be a YAML file)
 
+default_category = a single lowercase word (if not specified, this defaults
+to "open").  See below for more on categories.
+
 entity_type = a single word (underscores/hyphens allowed) that describes
 the type of thing you're modelling in the plural (e.g. "shops", "pubs").
 This is used to form URLs e.g. http://londonbookshops.org/shops/gosh.html
@@ -29,8 +32,33 @@ site_name = a pretty title for the site, e.g. London Bookshop Map
 sort_by_id = set this to 1 to sort by ID instead of name when listing your
 shops/pubs/whatever
 
-You can also have a section called [links] which maps datafile keys
-to names of websites, e.g.
+
+* Categories
+
+For now, each entity should be in one and only one category.  Categories are
+defined in the config file in a [categories] section, e.g.
+
+[categories]
+closed = closed permanently
+open = still in existence
+
+and you can colour their markers selectively like so:
+
+[category_colours]
+closed = red
+open = green
+
+Colours are defined in main.css; with the default main.css included in this
+distribution, your options are blue, green, ltblue, orange, pink, purple, red,
+and yellow.
+
+
+* Links
+
+The [links] section of the config file maps datafile keys to names of
+websites, e.g.
+
+[links]
 diamondgeezer = diamond geezer article
 readingmatters = Reading Matters review
 whatpub = WhatPub entry
@@ -43,6 +71,7 @@ which will be transformed into
 <a href="http://diamondgeezer.blogspot.co.uk/2013/04/woolfson-tay.html">diamond
 geezer article</a>
 in the site HTML.
+
 
 * To amend the templates, create a directory called custom_templates/, copy
 the templates you want to amend from templates/ to custom_templates/, and

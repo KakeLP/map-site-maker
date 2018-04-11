@@ -1,0 +1,31 @@
+id: 222-veggie-vegan-restaurant-west-brompton
+name: 222 Veggie Vegan Restaurant
+address: 222 North End Road, West Brompton, W14 9NU
+rgl: http://london.randomness.org.uk/wiki.cgi?222_Veggie_Vegan_Restaurant,_W14_9NU
+long: -0.203032
+lat: 51.485966
+category: open
+---
+id: alkarmel-cafe-clapham
+name: Alkarmel Cafe
+address: 95 Landor Road, Clapham, SW9 9PH
+twitter: alkarmel_cafe
+brixtonblog: http://www.brixtonblog.com/vegging-in-brixton-our-meat-free-recommendations/11609
+long: -0.12577400000000002
+lat: 51.465812
+---
+id: amico-bio-new-oxford-street
+name: Amico Bio (New Oxford Street)
+address: 43 New Oxford Street, WC1A 1BH
+description: Now closed, though <a href="amico-bio-ec1.html">the original branch near Smithfield Market</a> remains open.
+photo: http://www.flickr.com/photos/rjw1/8545245209/
+website: http://www.amicobio.co.uk/
+rgl: http://london.randomness.org.uk/wiki.cgi?Amico_Bio,_WC1A_1BH
+long: -0.125506
+lat: 51.51707
+category: closed
+---
+id: warehouse-theatre
+name: Warehouse Theatre
+address: Dingwall Road, Croydon
+category: demolished

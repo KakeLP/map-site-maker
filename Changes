@@ -1,6 +1,16 @@
+0.012   2018-04-11
+      - Convert open/closed status stuff to use categories instead.  For
+        backwards compatibility, datafiles using open: yes and open: no will
+        be treated as if they had category: open and category:closed instead.
+        For now, everything must be in one and only one category.
+      - As part of the above, some of the Javascript has changed.  If you have
+        custom map.tt or map_js.tt templates, please check them against the
+        distribution templates and incorporate the changes.
+      - Some of the CSS has also changed, so please check your main.css too.
+
 0.011   2018-04-07
-      - Remove unused call to main.js
-      - Add option to sort by ID instead of name
+      - Remove unused call to main.js.
+      - Add option to sort by ID instead of name.
 
 0.010   2018-02-08
       - Remove Mapquest layer since the open version of the tiles stopped
