@@ -184,6 +184,7 @@ li.cat_colour_yellow:before, td.cat_colour_yellow {
   }
 
   div#entity_list {
+    clear: left;
     float: left;
     max-width: 20%;
     height: 90%;
