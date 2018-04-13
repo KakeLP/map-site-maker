@@ -1,6 +1,10 @@
-0.013
+0.013   2018-04-13
       - Fix CSS bug that created an unpannable part of the map next to the
         category list.
+      - Switch to pure CSS map markers, and add more colours.  As with the
+        previous update, please check your main.css (and if you have a custom
+        map_js.tt, that too) against the one in the distribution and
+        incorporate the changes.
 
 0.012   2018-04-11
       - Convert open/closed status stuff to use categories instead.  For

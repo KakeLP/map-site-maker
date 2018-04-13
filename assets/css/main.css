@@ -142,29 +142,66 @@ ul.category_list li:before {
   border: thin solid black;
 }
 
-li.cat_colour_blue:before, td.cat_colour_blue {
+li.cat_colour_blue:before, td.cat_colour_blue, div.blue-map-marker {
   background-color: #5781fc;
 }
-li.cat_colour_green:before, td.cat_colour_green {
+li.cat_colour_brown:before, td.cat_colour_brown, div.brown-map-marker{
+  background-color: #b57212;
+}
+li.cat_colour_dkbrown:before, td.cat_colour_dkbrown, div.dkbrown-map-marker{
+  background-color: #72480b;
+}
+li.cat_colour_dkgreen:before, td.cat_colour_dkgreen, div.dkgreen-map-marker{
+  background-color: #227738;
+}
+li.cat_colour_dkgrey:before, td.cat_colour_dkgrey, div.dkgrey-map-marker {
+  background-color: #464b48;
+}
+li.cat_colour_dkred:before, td.cat_colour_dkred, div.dkred-map-marker {
+  background-color: #ae1a0a;
+}
+li.cat_colour_green:before, td.cat_colour_green, div.green-map-marker {
   background-color: #00e13c;
 }
-li.cat_colour_ltblue:before, td.cat_colour_ltblue {
+li.cat_colour_grey:before, td.cat_colour_grey, div.grey-map-marker {
+  background-color: #909892;
+}
+li.cat_colour_ltblue:before, td.cat_colour_ltblue, div.ltblue-map-marker {
   background-color: #55d7d7;
 }
-li.cat_colour_orange:before, td.cat_colour_orange {
+li.cat_colour_ltpink:before, td.cat_colour_ltpink, div.ltpink-map-marker {
+  background-color: #de9cc0;
+}
+li.cat_colour_ltpurple:before, td.cat_colour_ltpurple, div.ltpurple-map-marker{
+  background-color: #a48eea;
+}
+li.cat_colour_orange:before, td.cat_colour_orange, div.orange-map-marker {
   background-color: #ff9900;
 }
-li.cat_colour_pink:before, td.cat_colour_pink {
+li.cat_colour_pink:before, td.cat_colour_pink, div.pink-map-marker {
   background-color: #e14f9e;
 }
-li.cat_colour_purple:before, td.cat_colour_purple {
+li.cat_colour_purple:before, td.cat_colour_purple, div.purple-map-marker {
   background-color: #7e55fc;
 }
-li.cat_colour_red:before, td.cat_colour_red {
+li.cat_colour_red:before, td.cat_colour_red, div.red-map-marker {
   background-color: #fc6355;
 }
-li.cat_colour_yellow:before, td.cat_colour_yellow {
+li.cat_colour_yellow:before, td.cat_colour_yellow, div.yellow-map-marker {
   background-color: #fcf357;
+}
+
+div.map-marker-container {
+  margin-top: -42px;
+  margin-left: -15px;
+}
+
+div.map-marker {
+  border: 0.5px solid #000;
+  width: 30px;
+  height: 25px;
+  border-radius: 100% 30% 0 30%;
+  transform: rotate( 63deg ) skew( 33deg );
 }
 
 @media (min-width: 1000px) {

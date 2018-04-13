@@ -49,8 +49,8 @@ closed = red
 open = green
 
 Colours are defined in main.css; with the default main.css included in this
-distribution, your options are blue, green, ltblue, orange, pink, purple, red,
-and yellow.
+distribution, your options are blue, brown, dkbrown, dkgreen, dkgrey, dkred,
+green, grey, ltblue, ltpink, ltpurple, orange, pink, purple, red, and yellow.
 
 
 * Links

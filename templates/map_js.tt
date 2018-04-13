@@ -2,17 +2,19 @@ var min_lat, min_long, max_lat, max_long, centre_lat, centre_long, map;
 var positions = [], markers = [], closed_markers = [], categories = [];
 var icons = {};
 
-var gicon = L.Icon.extend( {
-    options: {
-      shadowUrl: null,
-      iconSize: new L.Point( 32, 32 ),
-      iconAnchor: new L.Point( 15, 32 ),
-      popupAnchor: new L.Point( 0, -30 )
-    }
-} );
-
 function create_icon( colour ) {
-  return new gicon( { iconUrl: 'http://maps.google.com/mapfiles/ms/micons/' + colour + '-dot.png' } );
+  // We have to create an extra div inside the icon div because we want
+  // to transform the icon using rotate, and Leaflet uses the 'transform'
+  // property to place the div, so otherwise our rotate would get
+  // clobbered every time the map was panned or zoomed.  Also, we have
+  // to set the iconSize to null since otherwise Leaflet assigns it a
+  // fixed width and height, and we want the container to expand to the
+  // size of the actual marker div.
+  return L.divIcon( { className: 'map-marker-container',
+                      iconSize: null,
+                      html: '<div class="map-marker ' + colour
+                            + '-map-marker"></div>',
+                      popupAnchor: [ 1, -44 ] } );
 }
 
 icons.open = create_icon( 'green' );
