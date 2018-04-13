@@ -178,6 +178,8 @@ li.cat_colour_yellow:before, td.cat_colour_yellow {
   }
 
   div#category_list {
+    float: left;
+    max-width: 20%;
     padding-bottom: 1em;
   }
 
