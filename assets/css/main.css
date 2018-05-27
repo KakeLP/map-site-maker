@@ -142,11 +142,20 @@ ul.category_list li:before {
   border: thin solid black;
 }
 
+li.cat_colour_black:before, td.cat_colour_black, div.black-map-marker {
+  background-color: #000;
+}
 li.cat_colour_blue:before, td.cat_colour_blue, div.blue-map-marker {
   background-color: #5781fc;
 }
 li.cat_colour_brown:before, td.cat_colour_brown, div.brown-map-marker{
   background-color: #b57212;
+}
+li.cat_colour_coral:before, td.cat_colour_coral, div.coral-map-marker {
+  background-color: #ffd8b1;
+}
+li.cat_colour_dkblue:before, td.cat_colour_dkblue, div.dkblue-map-marker {
+  background-color: #1a1acb;
 }
 li.cat_colour_dkbrown:before, td.cat_colour_dkbrown, div.dkbrown-map-marker{
   background-color: #72480b;
@@ -156,6 +165,12 @@ li.cat_colour_dkgreen:before, td.cat_colour_dkgreen, div.dkgreen-map-marker{
 }
 li.cat_colour_dkgrey:before, td.cat_colour_dkgrey, div.dkgrey-map-marker {
   background-color: #464b48;
+}
+li.cat_colour_dkorange:before, td.cat_colour_dkorange, div.dkorange-map-marker{
+  background-color: #e75400;
+}
+li.cat_colour_dkpurple:before, td.cat_colour_dkpurple, div.dkpurple-map-marker {
+  background-color: #6429a2;
 }
 li.cat_colour_dkred:before, td.cat_colour_dkred, div.dkred-map-marker {
   background-color: #ae1a0a;
@@ -173,7 +188,10 @@ li.cat_colour_grey:before, td.cat_colour_grey, div.grey-map-marker {
   background-color: #909892;
 }
 li.cat_colour_ltblue:before, td.cat_colour_ltblue, div.ltblue-map-marker {
-  background-color: #55d7d7;
+  background-color: #6bb7fd;
+}
+li.cat_colour_ltgreen:before, td.cat_colour_ltgreen, div.ltgreen-map-marker {
+  background-color: #c2ff99;
 }
 li.cat_colour_ltpink:before, td.cat_colour_ltpink, div.ltpink-map-marker {
   background-color: #de9cc0;
@@ -184,6 +202,9 @@ li.cat_colour_ltpurple:before, td.cat_colour_ltpurple, div.ltpurple-map-marker{
 li.cat_colour_orange:before, td.cat_colour_orange, div.orange-map-marker {
   background-color: #ff9900;
 }
+li.cat_colour_peach:before, td.cat_colour_peach, div.peach-map-marker {
+  background-color: #f3b49f;
+}
 li.cat_colour_pink:before, td.cat_colour_pink, div.pink-map-marker {
   background-color: #eb5cf4;
 }
@@ -191,13 +212,22 @@ li.cat_colour_purple:before, td.cat_colour_purple, div.purple-map-marker {
   background-color: #7e55fc;
 }
 li.cat_colour_red:before, td.cat_colour_red, div.red-map-marker {
-  background-color: #fc6355;
+  background-color: #e71e1e;
 }
 li.cat_colour_sage:before, td.cat_colour_sage, div.sage-map-marker {
   background-color: #99a31d;
 }
 li.cat_colour_silver:before, td.cat_colour_silver, div.silver-map-marker {
   background-color: #d6edff;
+}
+li.cat_colour_teal:before, td.cat_colour_teal, div.teal-map-marker {
+  background-color: #00b57f;
+}
+li.cat_colour_turquoise:before, td.cat_colour_turquoise, div.turquoise-map-marker {
+  background-color: #1ed9d2;
+}
+li.cat_colour_white:before, td.cat_colour_white, div.white-map-marker {
+  background-color: #fff;
 }
 li.cat_colour_yellow:before, td.cat_colour_yellow, div.yellow-map-marker {
   background-color: #fcf357;
