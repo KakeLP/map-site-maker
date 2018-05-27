@@ -32,6 +32,9 @@ site_name = a pretty title for the site, e.g. London Bookshop Map
 sort_by_id = set this to 1 to sort by ID instead of name when listing your
 shops/pubs/whatever
 
+show_hide_all_cats_link = set this to 1 to add links for showing/hiding all
+categories to the map display (mainly useful for sites with many categories)
+
 
 * Categories
 

@@ -44,6 +44,19 @@ $(
 
     create_all_markers();
     show_all_markers();
+
+    $( '#hide_all_cats' ).click(
+                                 function() {
+                                   hide_all_markers();
+                                   return false;
+                                 }
+                               );
+    $( '#show_all_cats' ).click(
+                                 function() {
+                                   show_all_markers();
+                                   return false;
+                                 }
+                               );
   }
 );
 

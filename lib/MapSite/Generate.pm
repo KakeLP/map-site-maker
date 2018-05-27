@@ -120,6 +120,7 @@ sub generate_site {
     entity_type => $entity_type,
     site_description => $conf->{_}->{site_description} || "A website with a lovely map.",
     site_name => $conf->{_}->{site_name} || "A MapSite website that hasn't configured its site_name",
+    conf => $conf->{_},
   } );
 
   # Set up Flickr stuff.
