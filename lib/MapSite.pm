@@ -10,7 +10,7 @@ MapSite->mk_accessors( qw( conf_file ) );
 
 our $errstr;
 
-our $VERSION = "0.013";
+our $VERSION = "0.014";
 
 =head1 NAME
 

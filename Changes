@@ -1,3 +1,6 @@
+0.014
+      - Add even more map marker colours.
+
 0.013   2018-04-13
       - Fix CSS bug that created an unpannable part of the map next to the
         category list.

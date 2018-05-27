@@ -160,6 +160,12 @@ li.cat_colour_dkgrey:before, td.cat_colour_dkgrey, div.dkgrey-map-marker {
 li.cat_colour_dkred:before, td.cat_colour_dkred, div.dkred-map-marker {
   background-color: #ae1a0a;
 }
+li.cat_colour_fuchsia:before, td.cat_colour_fuchsia, div.fuchsia-map-marker {
+  background-color: #e400f2;
+}
+li.cat_colour_gold:before, td.cat_colour_gold, div.gold-map-marker {
+  background-color: #f1c915;
+}
 li.cat_colour_green:before, td.cat_colour_green, div.green-map-marker {
   background-color: #00e13c;
 }
@@ -179,13 +185,19 @@ li.cat_colour_orange:before, td.cat_colour_orange, div.orange-map-marker {
   background-color: #ff9900;
 }
 li.cat_colour_pink:before, td.cat_colour_pink, div.pink-map-marker {
-  background-color: #e14f9e;
+  background-color: #eb5cf4;
 }
 li.cat_colour_purple:before, td.cat_colour_purple, div.purple-map-marker {
   background-color: #7e55fc;
 }
 li.cat_colour_red:before, td.cat_colour_red, div.red-map-marker {
   background-color: #fc6355;
+}
+li.cat_colour_sage:before, td.cat_colour_sage, div.sage-map-marker {
+  background-color: #99a31d;
+}
+li.cat_colour_silver:before, td.cat_colour_silver, div.silver-map-marker {
+  background-color: #d6edff;
 }
 li.cat_colour_yellow:before, td.cat_colour_yellow, div.yellow-map-marker {
   background-color: #fcf357;
