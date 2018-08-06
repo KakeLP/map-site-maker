@@ -8,7 +8,7 @@ Keep this secret!  Do not share it with anyone!
 
 * Put other variables in conf/mapsite.conf.  In the root section:
 
-base_url = the root URL of the site, e.g. http://londonbookshops.org/
+base_url = the root URL of the site, e.g. https://londonbookshops.org/
 
 datafile = the location of the datafile, e.g. /home/kake/data/bookshops.yaml
 (note that currently this must be a YAML file)
@@ -18,7 +18,7 @@ to "open").  See below for more on categories.
 
 entity_type = a single word (underscores/hyphens allowed) that describes
 the type of thing you're modelling in the plural (e.g. "shops", "pubs").
-This is used to form URLs e.g. http://londonbookshops.org/shops/gosh.html
+This is used to form URLs e.g. https://londonbookshops.org/shops/gosh.html
 
 kml_filename = a filename for the KML that will be generated
 (e.g. bookshops.kml).  This will default to $entity_type.kml
@@ -70,10 +70,10 @@ whatpub = WhatPub entry
 yelp = Yelp comments
 
 Then in your datafile you'll have e.g.
-diamondgeezer: http://diamondgeezer.blogspot.co.uk/2013/04/woolfson-tay.html
+diamondgeezer: https://diamondgeezer.blogspot.co.uk/2013/04/woolfson-tay.html
 
 which will be transformed into
-<a href="http://diamondgeezer.blogspot.co.uk/2013/04/woolfson-tay.html">diamond
+<a href="https://diamondgeezer.blogspot.co.uk/2013/04/woolfson-tay.html">diamond
 geezer article</a>
 in the site HTML.
 

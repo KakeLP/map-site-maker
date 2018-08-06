@@ -1,6 +1,6 @@
 [%- USE CGI -%]
 <?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<kml xmlns="https://www.opengis.net/kml/2.2" xmlns:atom="https://www.w3.org/2005/Atom">
   <Document>
 
  <name>[% site_name %] KML</name>
@@ -11,21 +11,21 @@
     <Style id="green">
       <IconStyle>
         <Icon>
-          <href>http://maps.google.com/mapfiles/ms/micons/green-dot.png</href>
+          <href>https://maps.google.com/mapfiles/ms/micons/green-dot.png</href>
         </Icon>
       </IconStyle>
     </Style>
     <Style id="yellow">
       <IconStyle>
         <Icon>
-          <href>http://maps.google.com/mapfiles/ms/micons/yellow-dot.png</href>
+          <href>https://maps.google.com/mapfiles/ms/micons/yellow-dot.png</href>
         </Icon>
       </IconStyle>
     </Style>
     <Style id="red">
       <IconStyle>
         <Icon>
-          <href>http://maps.google.com/mapfiles/ms/micons/red-dot.png</href>
+          <href>https://maps.google.com/mapfiles/ms/micons/red-dot.png</href>
         </Icon>
       </IconStyle>
     </Style>

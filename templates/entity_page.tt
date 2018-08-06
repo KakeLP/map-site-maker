@@ -30,13 +30,13 @@
     <td>
       [% entity.address | html %]
       [% IF entity.os_x AND entity.os_y %]
-        (<a href="http://streetmap.co.uk/map.srf?x=[% entity.os_x | html %]&amp;y=[% entity.os_y | html %]">streetmap</a>)
+        (<a href="https://streetmap.co.uk/map.srf?x=[% entity.os_x | html %]&amp;y=[% entity.os_y | html %]">streetmap</a>)
       [% END %]
       [% IF entity.lat_and_long %]
-        (<a href="http://www.openstreetmap.org/?mlat=[% entity.lat | html %]&amp;mlon=[% entity.long | html %]&amp;zoom=15">osm</a>)
-        (<a href="http://maps.google.co.uk/maps?q=[% FILTER replace( '\s', '+' ) %][% node_name %][% END %]@[% entity.lat %],[% entity.long %]&amp;z=15">gmap</a>)
-        (<a href="http://www.bing.com/maps/default.aspx?cp=[% entity.lat %]~[% entity.long %]&amp;style=c&amp;lvl=15&amp;rtp=~pos.[% entity.lat %]_[% entity.long %]_[% node_name | replace( '\s', '+' ) %]">bingmap</a>)
-        (<a href="http://maps.google.co.uk/maps?q=[% entity.lat %],[% entity.long %]&amp;cbll=[% entity.lat %],[% entity.long %]&amp;layer=c&amp;cbp=12,0,,0,5">streetview</a>)
+        (<a href="https://www.openstreetmap.org/?mlat=[% entity.lat | html %]&amp;mlon=[% entity.long | html %]&amp;zoom=15">osm</a>)
+        (<a href="https://maps.google.co.uk/maps?q=[% FILTER replace( '\s', '+' ) %][% node_name %][% END %]@[% entity.lat %],[% entity.long %]&amp;z=15">gmap</a>)
+        (<a href="https://www.bing.com/maps/default.aspx?cp=[% entity.lat %]~[% entity.long %]&amp;style=c&amp;lvl=15&amp;rtp=~pos.[% entity.lat %]_[% entity.long %]_[% node_name | replace( '\s', '+' ) %]">bingmap</a>)
+        (<a href="https://maps.google.co.uk/maps?q=[% entity.lat %],[% entity.long %]&amp;cbll=[% entity.lat %],[% entity.long %]&amp;layer=c&amp;cbp=12,0,,0,5">streetview</a>)
       [% END %]
     </td>
   </tr>
@@ -61,7 +61,7 @@
   [% IF entity.twitter %]
     <tr class="entity_twitter">
       <th>Twitter:</th>
-      <td><a href="http://twitter.com/[% entity.twitter | html %]">@[% entity.twitter | html %]</a></td>
+      <td><a href="https://twitter.com/[% entity.twitter | html %]">@[% entity.twitter | html %]</a></td>
     </tr>
   [% END %]
   [% IF entity.has_links %]

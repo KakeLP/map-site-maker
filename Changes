@@ -1,3 +1,8 @@
+0.015   2018-08-06
+      - Switch links/embeds to HTTPS wherever possible.  If you have a custom
+        map_js.tt, please check it against the distribution template and
+        incorporate the changes.
+
 0.014   2018-05-27
       - Add option for links to hide/show all categories.
       - Add even more map marker colours.

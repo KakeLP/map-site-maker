@@ -26,8 +26,8 @@ $(
     var map_centre = new L.LatLng( centre_lat, centre_long );
     map = new L.Map( 'map_canvas', { center: map_centre } );
 
-    var osm_url = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    var osm_attrib = '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>';
+    var osm_url = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    var osm_attrib = '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>';
 
     var osm_layer = new L.TileLayer( osm_url, { attribution: osm_attrib } );
 
