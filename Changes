@@ -1,3 +1,9 @@
+0.016   2019-05-25
+      - Add facility to increase number of discernable categories by adding
+        dots to markers.  If you have a custom category_list.tt, list.tt,
+        map.tt, map_js.tt, or main.css, you should incorporate the changes into
+        it/them.
+
 0.015   2018-08-06
       - Switch links/embeds to HTTPS wherever possible.  If you have a custom
         map_js.tt, please check it against the distribution template and

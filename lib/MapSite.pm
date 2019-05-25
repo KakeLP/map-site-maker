@@ -10,7 +10,7 @@ MapSite->mk_accessors( qw( conf_file ) );
 
 our $errstr;
 
-our $VERSION = "0.015";
+our $VERSION = "0.016";
 
 =head1 NAME
 
@@ -337,7 +337,13 @@ sub parse_datafile {
   my @cats = map {
                    my $name = $catnames{$_} || $_;
                    my $colour = $catcolours{$_} || "green";
-                   { id => $_, name => $name, colour => $colour }
+                   my $decor = "";
+                   if ( $colour =~ m/-dot$/ ) {
+                     $colour =~ s/-dot$//;
+                     $decor = "dot";
+                   }
+                   { id => $_, name => $name, colour => $colour,
+                     decor => $decor }
                  } sort keys %categories;
 
   return (

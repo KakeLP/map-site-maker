@@ -7,7 +7,7 @@
   <div class="entity_table_key">
     <table>
       [% FOREACH cat = categories %]
-        <tr><td class="category cat_[% cat.id %] cat_colour_[% cat.colour %]">&nbsp;</td><td> = [% cat.name %]</td></tr>
+        <tr><td class="category cat_[% cat.id %] cat_colour_[% cat.colour %]">[% IF cat.decor %]<div class="cat_decor_[% cat.decor %]"></div>[% ELSE %]&nbsp;[% END %]</td><td> = [% cat.name %]</td></tr>
       [% END %]
     </table>
   </div>
@@ -24,10 +24,11 @@
       [% FOREACH category = categories %]
         [% IF category.id == cat %]
           [% colour = category.colour %]
+          [% decor = category.decor %]
         [% END %]
       [% END %]
       <tr>
-        <td class="category cat_[% cat %] cat_colour_[% colour %]">&nbsp;</td>
+        <td class="category cat_[% cat %] cat_colour_[% colour %]">[% IF decor %]<div class="cat_decor_[% decor %]">[% ELSE %]&nbsp;[% END %]</td>
         <td><a href="[% base_url %][% entity_type %]/[% entity.id | html %].html">[% entity.name | html %]</a></td>
         <td>[% entity.address | html %]</td>
       </tr>

@@ -57,6 +57,12 @@ dkgreen, dkgrey, dkorange, dkpurple, dkred, fuchsia, gold, green, grey,
 ltblue, ltgreen, ltpink, ltpurple, orange, peach, pink, purple, red, sage,
 silver, teal, turquoise, white, and yellow.
 
+If you have more categories than colours, you can append "-dot" to a colour
+to get a circular dot added to the markers for that category:
+
+[category_colours]
+cafe = brown
+restaurant = brown-dot
 
 * Links
 

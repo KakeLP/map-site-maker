@@ -2,7 +2,7 @@ var min_lat, min_long, max_lat, max_long, centre_lat, centre_long, map;
 var positions = [], markers = [], closed_markers = [], categories = [];
 var icons = {};
 
-function create_icon( colour ) {
+function create_icon( colour, decor ) {
   // We have to create an extra div inside the icon div because we want
   // to transform the icon using rotate, and Leaflet uses the 'transform'
   // property to place the div, so otherwise our rotate would get
@@ -10,10 +10,13 @@ function create_icon( colour ) {
   // to set the iconSize to null since otherwise Leaflet assigns it a
   // fixed width and height, and we want the container to expand to the
   // size of the actual marker div.
+  var html = '<div class="map-marker ' + colour + '-map-marker"></div>';
+  if ( decor ) {
+    html += '<div class="' + decor + '-decor-map-marker"></div>';
+  }
   return L.divIcon( { className: 'map-marker-container',
                       iconSize: null,
-                      html: '<div class="map-marker ' + colour
-                            + '-map-marker"></div>',
+                      html: html,
                       popupAnchor: [ 1, -44 ] } );
 }
 

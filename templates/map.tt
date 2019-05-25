@@ -45,7 +45,7 @@
   centre_long = [% centre_long %];
 
   [% FOREACH category = categories %]
-    icons['[% category.id %]'] = create_icon( '[% category.colour %]' );
+    icons['[% category.id %]'] = create_icon( '[% category.colour %]', '[% category.decor %]' );
   [% END %]
 
   function create_all_markers() {

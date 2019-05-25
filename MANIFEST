@@ -20,6 +20,7 @@ t/conf/601.conf
 t/conf/602.conf
 t/conf/602a.conf
 t/conf/602b.conf
+t/conf/603.conf
 t/data/201.yaml
 t/data/251.yaml
 t/data/301.yaml
@@ -30,6 +31,7 @@ t/data/601.yaml
 t/data/601a.yaml
 t/data/601b.yaml
 t/data/602.yaml
+t/data/603.yaml
 t/001_load.t
 t/201_open_closed.t
 t/251_external_links.t
@@ -39,3 +41,4 @@ t/501_parse_without_flickr.t
 t/502_flickr_realname_missing.t
 t/601_categories.t
 t/602_hide_all_cats.t
+t/603_category_colours.t

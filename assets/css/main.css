@@ -130,16 +130,33 @@ ul.category_list li {
   position: relative;
 }
 
-ul.category_list li:before {
+ul.category_list li::before {
   content: '';
   display: block;
   position: absolute;
-  width: 0.6em;
-  height: 0.6em;
-  border-radius: 0.6em;
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 0.5em;
   left: -20px;
   top: 0.3em;
   border: thin solid black;
+}
+
+ul.category_list li.cat_decor_dot::before {
+  content: '\00b7';
+  font-size: 2em;
+  width: 0.25em;
+  height: 0.25em;
+  top: 0.15em;
+  border-radius: 0.25em;
+  line-height: 0.2em;
+}
+
+/* Firefox and Chrome have different ideas about where the dot should go. */
+@media( min--moz-device-pixel-ratio:0 ) {
+  ul.category_list li.cat_decor_dot::before {
+    line-height: 0.15em;
+  }
 }
 
 li.cat_colour_black:before, td.cat_colour_black, div.black-map-marker {
@@ -233,6 +250,13 @@ li.cat_colour_yellow:before, td.cat_colour_yellow, div.yellow-map-marker {
   background-color: #fcf357;
 }
 
+div.cat_decor_dot {
+  width: 0.5em;
+  height: 0.5em;
+  background-color: #000;
+  border-radius: 100%;
+}
+
 div.map-marker-container {
   margin-top: -42px;
   margin-left: -15px;
@@ -244,6 +268,16 @@ div.map-marker {
   height: 25px;
   border-radius: 100% 30% 0 30%;
   transform: rotate( 63deg ) skew( 33deg );
+}
+
+div.dot-decor-map-marker {
+  width: 10px;
+  height: 10px;
+  background-color: #000;
+  border-radius: 100%;
+  margin-top: -20px;
+  margin-left: 10px;
+  position: relative;
 }
 
 @media (min-width: 1000px) {
